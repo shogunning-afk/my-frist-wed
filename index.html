@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE GRAND FRONTIER: PROJECT OMNI — ผจญภัยไร้ขีดจำกัดในจักรวาลที่ขับเคลื่อนด้วยฟิสิกส์</title>
+<meta name="description" content="เกม Action-Adventure / Physics Sandbox / Endless Co-op ที่ทุกอย่างตอบสนองตามฟิสิกส์จริง สร้างได้ทุกอย่าง แก้ปัญหาได้ทุกวิธี และสร้างความทรงจำร่วมกับเพื่อนที่ไม่มีวันลืม">
+<meta name="theme-color" content="#07070d">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="THE GRAND FRONTIER: PROJECT OMNI">
+<meta property="og:description" content="ผจญภัยไร้ขีดจำกัดในจักรวาลที่ขับเคลื่อนด้วยฟิสิกส์และความคิดสร้างสรรค์">
+<meta property="og:locale" content="th_TH">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700;900&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#core">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top">
+      <span class="brand__mark" aria-hidden="true">🌌</span>
+      <span class="brand__text">
+        <b>OMNI</b>
+        <i>THE GRAND FRONTIER</i>
+      </span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="เปิดเมนู">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav__menu" id="navMenu" aria-label="เมนูหลัก">
+      <a href="#core">แก่นของเกม</a>
+      <a href="#pillars">ระบบเด่น</a>
+      <a href="#chaos">ความโกลาหล</a>
+      <a href="#why">ทำไมถึงพิเศษ</a>
+      <a href="#players">สายการเล่น</a>
+      <a href="#dna">นิยาม</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="top">
+  <canvas class="hero__canvas" id="physicsCanvas" aria-hidden="true"></canvas>
+  <div class="hero__veil" aria-hidden="true"></div>
+
+  <div class="wrap hero__inner">
+    <p class="hero__kicker">Action-Adventure · Physics Sandbox · Endless Co-op</p>
+
+    <h1 class="hero__title">
+      <span class="hero__title-top">THE GRAND FRONTIER</span>
+      <span class="hero__title-main">PROJECT <em>OMNI</em></span>
+    </h1>
+
+    <p class="hero__lead">
+      โลกเปิดขนาดมหาศาลที่ขับเคลื่อนด้วย <strong>ฟิสิกส์จริงร้อยเปอร์เซ็นต์</strong>
+      และความคิดสร้างสรรค์แบบไร้ขีดจำกัด — ออกเดินทางกับเพื่อน ค้นพบสมบัติ ต่อสู้ สร้าง
+      และแก้ปัญหา ด้วยวิธีอะไรก็ได้ที่คุณจินตนาการออก
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#core">สำรวจจักรวาล</a>
+      <a class="btn btn--ghost" href="#dna">เกมนี้คืออะไร?</a>
+    </div>
+
+    <p class="hero__hint" id="heroHint">
+      <span aria-hidden="true">✦</span> ลองลากเมาส์หรือแตะบนพื้นที่นี้ดู — ทุกอย่างตกและชนกันตามฟิสิกส์จริง
+    </p>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
+</section>
+
+<main>
+
+<!-- ======================= CORE ======================= -->
+<section class="section" id="core">
+  <div class="wrap">
+    <p class="eyebrow reveal">🎯 Core Concept</p>
+    <h2 class="h2 reveal">แก่นของเกม</h2>
+
+    <div class="core">
+      <p class="core__lead reveal">
+        เกมแนว Open-World ผจญภัยและสร้างสรรค์ระดับมหาศาล ที่ขับเคลื่อนด้วย
+        <mark>“ระบบฟิสิกส์และความคิดสร้างสรรค์แบบไร้ขีดจำกัด”</mark>
+        คุณและกลุ่มเพื่อน (หรือเล่นคนเดียว) จะออกเดินทางท่องไปในจักรวาลที่เปลี่ยนไปเรื่อยๆ
+        เพื่อค้นพบสมบัติ ต่อสู้ สร้าง และแก้ปัญหา ด้วยวิธีอะไรก็ได้ที่คุณจินตนาการออก!
+      </p>
+
+      <ul class="stats reveal">
+        <li class="stat">
+          <b class="stat__num">100%</b>
+          <span class="stat__label">ทุกวัตถุตอบสนองตามฟิสิกส์จริง</span>
+        </li>
+        <li class="stat">
+          <b class="stat__num">∞</b>
+          <span class="stat__label">วิธีแก้ปัญหาในทุกสถานการณ์</span>
+        </li>
+        <li class="stat">
+          <b class="stat__num">1–4+</b>
+          <span class="stat__label">เล่นคนเดียว หรือลุยไปกับเพื่อน</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PILLARS ======================= -->
+<section class="section section--alt" id="pillars">
+  <div class="wrap">
+    <p class="eyebrow reveal">⚙️ Design Pillars</p>
+    <h2 class="h2 reveal">สามเสาหลักของเกม</h2>
+    <p class="sub reveal">ทุกระบบในเกมถูกออกแบบให้ส่งเสริมกันและกัน จนกลายเป็นเรื่องราวที่ไม่มีใครเขียนสคริปต์ไว้ล่วงหน้า</p>
+
+    <div class="cards">
+      <article class="card reveal" style="--i:0">
+        <span class="card__idx">01</span>
+        <span class="card__icon" aria-hidden="true">💥</span>
+        <h3 class="card__title">ฟิสิกส์และความโกลาหล<br>ที่ทั้งฮาและสะใจ</h3>
+        <p class="card__body">
+          ทุกอย่างในเกมนี้ตอบสนองตามฟิสิกส์จริงแบบร้อยเปอร์เซ็นต์
+          คุณสามารถสร้าง <b>รถรบ</b>, <b>เรือบิน</b> หรือ <b>หุ่นยนต์ยักษ์</b>
+          จากเศษขยะและวัตถุดิบที่หาได้ระหว่างทาง
+        </p>
+        <ul class="card__list">
+          <li>ต่อวัตถุเข้าด้วยกันได้อย่างอิสระ</li>
+          <li>น้ำหนัก แรงบิด และจุดศูนย์ถ่วงมีผลจริง</li>
+          <li>สิ่งที่ประกอบพังได้ ระเบิดได้ ไหม้ได้</li>
+        </ul>
+      </article>
+
+      <article class="card reveal" style="--i:1">
+        <span class="card__idx">02</span>
+        <span class="card__icon" aria-hidden="true">⚔️</span>
+        <h3 class="card__title">ระบบการต่อสู้ที่ลื่นไหล<br>ฟินและสะใจขั้นสุด</h3>
+        <p class="card__body">
+          การควบคุมตัวละครลื่นไหลระดับ <b>Devil May Cry</b> หรือ <b>Elden Ring</b>
+          รวมกับฟิลลิ่งการโจมตี (Hit Impact) ที่หนักแน่นทุกครั้งที่ปุ่มถูกกด
+        </p>
+        <ul class="card__list">
+          <li>Hitstop — ภาพชะลอเสี้ยววินาทีตอนฟันโดน</li>
+          <li>เสียงเอฟเฟกต์และการสั่นของจอยที่จูนมาแล้ว</li>
+          <li>คอมโบสายอาวุธ + สายไฟฟ้า/กลไก</li>
+        </ul>
+      </article>
+
+      <article class="card reveal" style="--i:2">
+        <span class="card__idx">03</span>
+        <span class="card__icon" aria-hidden="true">🗝️</span>
+        <h3 class="card__title">อิสระแบบ<br>“ไม่มีคำว่าไม่ได้”</h3>
+        <p class="card__body">
+          เจอกำแพงเมืองหนาๆ? เกมไม่เคยบังคับวิธีแก้ปัญหา —
+          คุณจะเลือกทางไหนก็ได้ที่คิดออก และเกมจะรองรับมันเสมอ
+        </p>
+        <ul class="card__list">
+          <li>ปีนขึ้นไป หรือใช้ปืนใหญ่ยิงพัง</li>
+          <li>แอบขุดรูลอดใต้ดิน</li>
+          <li>ผูกบอลลูนแล้วลอยข้ามไปเลย</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="pillars__note reveal">
+      อยากทำสมาคมร้านกาแฟกลางรังมอนสเตอร์? <b>ทำได้!</b>
+      อยากเป็นโจรสลัดอวกาศ? <b>ทำได้!</b>
+    </p>
+  </div>
+</section>
+
+<!-- ======================= CHAOS STORY ======================= -->
+<section class="section chaos" id="chaos">
+  <div class="wrap">
+    <p class="eyebrow reveal">🔥 Unpredictable Moments</p>
+    <h2 class="h2 reveal">สถานการณ์ที่คาดเดาไม่ได้</h2>
+
+    <ol class="story">
+      <li class="story__step reveal">
+        <span class="story__dot" aria-hidden="true"></span>
+        <p>คุณกับเพื่อนกำลังขับ<b>เรือบิน</b>ไปตีบ้านมอนสเตอร์</p>
+      </li>
+      <li class="story__step reveal">
+        <span class="story__dot" aria-hidden="true"></span>
+        <p>แต่เพื่อนดัน<b>ต่อสายไฟผิด</b>…</p>
+      </li>
+      <li class="story__step reveal">
+        <span class="story__dot" aria-hidden="true"></span>
+        <p>เครื่องยนต์<b>ระเบิด</b> เผาเรือรบตัวเองจนร่วงลงมา</p>
+      </li>
+      <li class="story__step reveal">
+        <span class="story__dot" aria-hidden="true"></span>
+        <p>ซากเรือตกลงไป<b>ทับรังบอสมังกร</b>ข้างล่างพอดี</p>
+      </li>
+      <li class="story__step story__step--final reveal">
+        <span class="story__dot" aria-hidden="true"></span>
+        <p>เกิดเป็นฉากการต่อสู้สุดมั่ว ที่ทั้งตื่นเต้นและ<b>หัวเราะท้องแข็งจนน้ำตาไหล</b></p>
+      </li>
+    </ol>
+
+    <blockquote class="pull reveal">
+      ไม่มีใครเขียนฉากนี้ไว้ในสคริปต์ — <b>ฟิสิกส์ต่างหากที่เขียนมันขึ้นมา</b>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ======================= WHY ======================= -->
+<section class="section section--alt" id="why">
+  <div class="wrap">
+    <p class="eyebrow reveal">💎 Why It Matters</p>
+    <h2 class="h2 reveal">ทำไมเกมนี้ถึงพิเศษ</h2>
+
+    <div class="why">
+      <article class="why__item reveal">
+        <h3 class="why__title"><span aria-hidden="true">🤝</span> สร้าง “มิตรภาพและความทรงจำจริง”</h3>
+        <p>
+          เกมส่วนใหญ่พอเล่นจบก็ลืม… แต่เกมนี้จะสร้าง <b>ความทรงจำร่วมกับเพื่อน</b>
+          พอเวลาผ่านไป 10 ปี คุณกับเพื่อนจะยังนั่งคุยกันว่า
+          <q>จำตอนที่เราโดนก๊อบลินแย่งยาน แล้วต้องขี่ขอนไม้ไปไล่ล่ามันได้ไหมวะ?</q>
+          มันกลายเป็น<b>ประวัติศาสตร์ส่วนตัว</b>ของผู้เล่น
+        </p>
+      </article>
+
+      <article class="why__item reveal">
+        <h3 class="why__title"><span aria-hidden="true">🌍</span> ไม่มีทางตัน เล่นได้ตลอดชีวิต</h3>
+        <p>
+          ด้วยระบบสร้างโลกและปริศนาที่ไม่ได้อิงแค่สคริปต์ แต่ใช้<b>อัลกอริทึมผสานกับฟิสิกส์</b>
+          ทำให้ทุกครั้งที่เปิดเกมขึ้นมา คุณจะได้เจอสิ่งใหม่ มอนสเตอร์แบบใหม่
+          และเรื่องราวใหม่ๆ เสมอ
+        </p>
+      </article>
+
+      <article class="why__item reveal">
+        <h3 class="why__title"><span aria-hidden="true">🌉</span> สะพานเชื่อมคนทุกกลุ่ม</h3>
+        <p>
+          ไม่ว่าคุณจะเล่นเกมแบบไหน เกมนี้มีที่ทางให้คุณเสมอ —
+          และที่สำคัญคือ <b>ทุกสายเล่นด้วยกันได้ในโลกเดียวกัน</b>
+          โดยไม่มีใครรู้สึกว่าตัวเองไม่มีบทบาท
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PLAYERS ======================= -->
+<section class="section" id="players">
+  <div class="wrap">
+    <p class="eyebrow reveal">🎮 Play Your Way</p>
+    <h2 class="h2 reveal">คุณเป็นผู้เล่นสายไหน?</h2>
+    <p class="sub reveal">เลือกดูได้เลย — แล้วชวนเพื่อนที่เล่นคนละสายมาอยู่ในโลกเดียวกัน</p>
+
+    <div class="players" role="tablist" aria-label="สายการเล่น">
+      <button class="ptab is-active" role="tab" id="tab-hardcore" aria-controls="panel-hardcore" aria-selected="true">
+        <span aria-hidden="true">🗡️</span> สาย Hardcore Combat
+      </button>
+      <button class="ptab" role="tab" id="tab-builder" aria-controls="panel-builder" aria-selected="false" tabindex="-1">
+        <span aria-hidden="true">🔧</span> สาย Builder
+      </button>
+      <button class="ptab" role="tab" id="tab-casual" aria-controls="panel-casual" aria-selected="false" tabindex="-1">
+        <span aria-hidden="true">🌱</span> สาย Casual
+      </button>
+    </div>
+
+    <div class="panels reveal">
+      <div class="panel is-active" role="tabpanel" id="panel-hardcore" aria-labelledby="tab-hardcore">
+        <h3>สนุกกับการคอมโบสายไฟ / อาวุธระดับเทพ</h3>
+        <p>
+          ไล่ล่าบอสที่ยากขึ้นเรื่อยๆ ฝึกจังหวะปัดป้อง เรียนรู้รูปแบบการโจมตี
+          และปรับจูนอาวุธ + กลไกไฟฟ้าให้เข้ากับสไตล์ตัวเอง
+          ทุกการกดปุ่มมีน้ำหนัก ทุกการหลบมีความหมาย
+        </p>
+        <ul>
+          <li>คอมโบไร้รอยต่อ พร้อม Hitstop ที่จูนมาอย่างดี</li>
+          <li>บอสที่ใช้ฟิสิกส์เป็นส่วนหนึ่งของรูปแบบการต่อสู้</li>
+          <li>อาวุธประกอบเองจากชิ้นส่วนที่หาได้</li>
+        </ul>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-builder" aria-labelledby="tab-builder" hidden>
+        <h3>สนุกกับการสร้างเมือง สร้างยานพาหนะ</h3>
+        <p>
+          ออกแบบฐานที่มั่น ต่อยานพาหนะจากเศษขยะ วางระบบไฟฟ้าและกลไก
+          แล้วดูว่ามันจะบินได้จริงไหม (หรือระเบิดใส่หน้าตัวเอง)
+          ความล้มเหลวก็สนุกไม่แพ้ความสำเร็จ
+        </p>
+        <ul>
+          <li>ต่อชิ้นส่วนอิสระ ไม่จำกัดรูปแบบ</li>
+          <li>ระบบไฟฟ้า/กลไกที่จำลองจริง</li>
+          <li>แชร์พิมพ์เขียวให้เพื่อนสร้างต่อได้</li>
+        </ul>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-casual" aria-labelledby="tab-casual" hidden>
+        <h3>สนุกกับการป่วนเพื่อน ทำฟาร์ม และสำรวจโลก</h3>
+        <p>
+          ไม่อยากตีบอสก็ไม่ต้องตี — ไปทำฟาร์ม เปิดร้านกาแฟ ตกปลา
+          เก็บของสะสม หรือแค่ขับยานเที่ยวชมโลกที่ไม่ซ้ำเดิม
+          และแอบถอดน็อตยานเพื่อนสักตัวก็ได้นะ
+        </p>
+        <ul>
+          <li>กิจกรรมผ่อนคลายที่ยังเชื่อมกับโลกหลัก</li>
+          <li>สำรวจภูมิภาคใหม่ที่สร้างขึ้นแบบไม่ซ้ำ</li>
+          <li>ระบบป่วนเพื่อนที่ (เกือบ) ไร้พิษภัย</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= DNA ======================= -->
+<section class="section section--alt dna" id="dna">
+  <div class="wrap">
+    <p class="eyebrow reveal">💡 In One Line</p>
+    <h2 class="h2 reveal">คำนิยามสั้นๆ ของเกมนี้</h2>
+
+    <div class="dna__mix">
+      <div class="dna__part reveal">
+        <b>ความตื่นเต้นของการผจญภัย</b>
+        <span>Zelda: Tears of the Kingdom</span>
+      </div>
+      <span class="dna__plus" aria-hidden="true">+</span>
+      <div class="dna__part reveal">
+        <b>ความอิสระและความผูกพัน</b>
+        <span>Minecraft / Valheim</span>
+      </div>
+      <span class="dna__plus" aria-hidden="true">+</span>
+      <div class="dna__part reveal">
+        <b>ความสะใจระดับบล็อกบัสเตอร์</b>
+        <span>Action Blockbuster</span>
+      </div>
+    </div>
+
+    <blockquote class="quote reveal">
+      <p>
+        “เกมที่นำความตื่นเต้นของการผจญภัยแบบ <b>Zelda: Tears of the Kingdom</b>,
+        ความอิสระและความผูกพันแบบ <b>Minecraft / Valheim</b>,
+        และความสะใจระดับ <b>Action บล็อกบัสเตอร์</b> มารวมไว้ด้วยกัน”
+      </p>
+      <cite>— THE GRAND FRONTIER: PROJECT OMNI</cite>
+    </blockquote>
+
+    <div class="cta reveal">
+      <h3>พร้อมออกเดินทางหรือยัง?</h3>
+      <p>จักรวาลนี้ยังไม่มีใครสำรวจครบ — และมันจะไม่มีวันครบ</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="#top">กลับไปเล่นกับฟิสิกส์อีกรอบ</a>
+        <a class="btn btn--ghost" href="docs/CONCEPT.md">อ่านเอกสารคอนเซปต์ฉบับเต็ม</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <p class="foot__brand">🌌 <b>THE GRAND FRONTIER</b> — Project Omni</p>
+    <p class="foot__note">Concept &amp; Design Document · เว็บไซต์นำเสนอแนวคิดเกม (Prototype)</p>
+  </div>
+</footer>
+
+<script src="assets/js/physics-hero.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
