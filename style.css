@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #080a12;
+  color: #e8f0ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+#game {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  /* The game draws its own cursor as a reticle. */
+  cursor: crosshair;
+  /* Keep the canvas crisp and stop mobile from hijacking drags. */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+.fallback {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  color: #8ea3c9;
+}

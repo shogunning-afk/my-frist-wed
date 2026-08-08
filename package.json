@@ -1,0 +1,20 @@
+{
+  "name": "grand-frontier-omni",
+  "version": "1.0.0",
+  "description": "The Grand Frontier: Omni - a modular physics sandbox action game with emergent combat, procedural worlds and fully synthesised audio.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "game",
+    "physics",
+    "sandbox",
+    "canvas",
+    "web-audio",
+    "procedural"
+  ],
+  "license": "MIT"
+}
