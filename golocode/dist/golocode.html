@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOLOCODE AI</title>
+<meta name="description" content="GOLOCODE routes any coding task to a squad drawn from 100 specialist agents — architecture, creative code, security, performance, delivery — then runs them in phases and returns complete, runnable code.">
+<meta name="theme-color" content="#05070a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="GOLOCODE AI">
+<meta property="og:description" content="One task in. A squad of specialists out. Complete, runnable code back.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--glc-bg: #05070a;--glc-bg-2: #090c12;--glc-surface: rgba(255, 255, 255, .045);--glc-surface-2:rgba(255, 255, 255, .08);--glc-line: rgba(255, 255, 255, .1);--glc-line-2: rgba(255, 255, 255, .18);--glc-text: #e7ecf3;--glc-muted: #8b95ab;--glc-dim: #5d6579;--glc-green: #39e08a;--glc-cyan: #4cc9ff;--glc-amber: #ffc25c;--glc-violet: #a78bfa;--glc-rose: #ff7a8a;--radius: 14px;--radius-sm: 9px;--wrap: 1240px;--mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;--sans: "Space Grotesk", "Noto Sans Thai", system-ui, -apple-system, sans-serif;--ease: cubic-bezier(.22, .61, .36, 1)}*{box-sizing:border-box}[hidden]{display:none!important}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{margin:0;background:radial-gradient(900px 500px at 15% -5%,rgba(57,224,138,.1),transparent 60%),radial-gradient(800px 480px at 95% 0%,rgba(76,201,255,.08),transparent 55%),var(--glc-bg);color:var(--glc-text);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh}h1,h2,h3{line-height:1.2;margin:0;font-weight:700}button,input,select,textarea{font:inherit;color:inherit}code,kbd,pre{font-family:var(--mono)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.skip-link{position:absolute;left:-9999px;top:0;z-index:99;background:var(--glc-green);color:#04120a;padding:.6rem 1rem;font-weight:700;border-radius:0 0 8px}.skip-link:focus{left:0}:focus-visible{outline:2px solid var(--glc-green);outline-offset:2px;border-radius:4px}main{width:min(100% - 2rem,var(--wrap));margin-inline:auto;padding-bottom:4rem}.hud{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:.8rem clamp(1rem,3vw,2rem);background:#05070ad1;backdrop-filter:blur(12px);border-bottom:1px solid var(--glc-line)}.hud__brand{display:flex;align-items:center;gap:.65rem;margin-right:auto}.hud__mark{font-size:1.4rem;color:var(--glc-green);filter:drop-shadow(0 0 10px rgba(57,224,138,.5))}.hud__name{display:flex;flex-direction:column;line-height:1.15}.hud__name b{font-family:var(--mono);font-weight:700;letter-spacing:.14em;font-size:1.02rem}.hud__name i{font-style:normal;font-size:.7rem;color:var(--glc-dim);letter-spacing:.08em;text-transform:uppercase}.hud__status{display:flex;gap:.4rem;flex-wrap:wrap}.pill{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--glc-muted);background:var(--glc-surface);border:1px solid var(--glc-line);border-radius:999px;padding:.3rem .65rem;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}.pill b{color:var(--glc-text);font-weight:700}.pill--live{color:var(--glc-green);border-color:#39e08a59}.pill--live b{color:var(--glc-green)}.dot{width:6px;height:6px;border-radius:50%;background:var(--glc-green);box-shadow:0 0 8px var(--glc-green);animation:pulse 2.4s var(--ease) infinite}@keyframes pulse{0%,to{opacity:1}50%{opacity:.35}}.hud__actions{display:flex;gap:.4rem}.btn{border:1px solid var(--glc-line-2);background:var(--glc-surface);color:var(--glc-text);padding:.5rem .9rem;border-radius:var(--radius-sm);cursor:pointer;font-size:.82rem;font-weight:500;transition:background .18s var(--ease),border-color .18s var(--ease),transform .12s var(--ease)}.btn:hover{background:var(--glc-surface-2);border-color:var(--glc-line-2)}.btn:active{transform:translateY(1px)}.btn[disabled]{opacity:.45;cursor:not-allowed}.btn--ghost{background:transparent}.btn--go{background:linear-gradient(135deg,var(--glc-green),#21c4d8);color:#04120a;border:none;font-weight:700;padding:.75rem 1.5rem;font-size:.92rem;display:inline-flex;align-items:center;gap:.55rem;box-shadow:0 6px 26px #39e08a38}.btn--go:hover{filter:brightness(1.07)}.btn__glyph{font-size:.8em}.btn--stop{border-color:#ff7a8a73;color:var(--glc-rose)}.btn--mini{padding:.32rem .62rem;font-size:.72rem;font-family:var(--mono)}.console{padding:clamp(2rem,5vw,3.4rem) 0 1.5rem}.console__title{font-size:clamp(1.7rem,4.4vw,2.9rem);letter-spacing:-.02em;margin-bottom:1.6rem}.console__title span{background:linear-gradient(100deg,var(--glc-green),var(--glc-cyan) 55%,var(--glc-violet));-webkit-background-clip:text;background-clip:text;color:transparent}.field{position:relative}.field__label,.control__label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glc-dim);margin-bottom:.45rem}#task{width:100%;background:var(--glc-bg-2);border:1px solid var(--glc-line);border-radius:var(--radius);padding:1rem 1.1rem;font-family:var(--mono);font-size:.88rem;line-height:1.6;resize:vertical;min-height:118px;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}#task::placeholder{color:var(--glc-dim)}#task:focus{outline:none;border-color:#39e08a80;box-shadow:0 0 0 4px #39e08a1a}.field__hint{color:var(--glc-dim);font-size:.76rem;margin:.5rem 0 0}kbd{background:var(--glc-surface);border:1px solid var(--glc-line);border-radius:5px;padding:.05rem .3rem;font-size:.9em}.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 1.4rem}.chip{background:var(--glc-surface);border:1px solid var(--glc-line);color:var(--glc-muted);border-radius:999px;padding:.32rem .8rem;font-size:.76rem;cursor:pointer;transition:color .16s var(--ease),border-color .16s var(--ease)}.chip:hover{color:var(--glc-green);border-color:#39e08a66}.controls{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-bottom:1.4rem}select{width:100%;background:var(--glc-bg-2);border:1px solid var(--glc-line);border-radius:var(--radius-sm);padding:.55rem .7rem;font-size:.82rem;cursor:pointer}.seg{display:flex;gap:.3rem;flex-wrap:wrap}.seg button{flex:1 1 auto;min-width:78px;background:var(--glc-bg-2);border:1px solid var(--glc-line);border-radius:var(--radius-sm);padding:.45rem .5rem;cursor:pointer;font-size:.74rem;color:var(--glc-muted);display:flex;flex-direction:column;align-items:center;gap:.1rem;transition:all .16s var(--ease)}.seg button b{font-family:var(--mono);font-size:.95rem;color:var(--glc-text)}.seg button[aria-checked=true]{border-color:#39e08a8c;background:#39e08a14;color:var(--glc-green)}.seg button[aria-checked=true] b{color:var(--glc-green)}.launch{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}.launch__note{margin:0;font-family:var(--mono);font-size:.72rem;color:var(--glc-dim)}.launch__note b{color:var(--glc-muted);font-weight:500}.fleet{margin-top:.5rem}.fleet__head{border-bottom:1px solid var(--glc-line);padding-bottom:.8rem}.fleet__head h2{font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--glc-muted)}.fleet__lead{margin:.4rem 0 0;color:var(--glc-dim);font-size:.82rem;max-width:66ch}.fleetGrid{display:grid;gap:.6rem;margin-top:1.1rem;grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}.divTile{text-align:left;cursor:pointer;border:1px solid var(--glc-line);border-radius:var(--radius);background:var(--glc-bg-2);padding:.75rem .8rem .8rem;transition:border-color .18s var(--ease),background .18s var(--ease)}.divTile:hover{border-color:var(--glc-line-2);background:var(--glc-surface)}.divTile__top{display:flex;align-items:center;gap:.45rem}.divTile__glyph{font-size:.95rem}.divTile__name{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.03em}.divTile__n{margin-left:auto;font-family:var(--mono);font-size:.6rem;color:var(--glc-dim)}.divTile__blurb{font-size:.72rem;color:var(--glc-muted);margin:.35rem 0 .5rem}.divTile__names{font-family:var(--mono);font-size:.58rem;color:var(--glc-dim);line-height:1.6;word-break:break-word}.readout{margin-top:1rem;scroll-margin-top:84px}.readout__head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;padding-bottom:.8rem;border-bottom:1px solid var(--glc-line)}.readout h2,.output h2{font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--glc-muted)}.profileStrip{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto}.waves{display:grid;gap:1.1rem;margin:1.2rem 0}.wave{border:1px solid var(--glc-line);border-radius:var(--radius);background:linear-gradient(180deg,var(--glc-surface),transparent 60%);padding:.9rem 1rem 1.1rem}.wave__head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap}.wave__glyph{color:var(--glc-cyan);font-size:1rem}.wave__name{font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}.wave__label{color:var(--glc-dim);font-size:.76rem}.wave__count{margin-left:auto;font-family:var(--mono);font-size:.68rem;color:var(--glc-dim)}.agents{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fill,minmax(215px,1fr))}.agent{position:relative;border:1px solid var(--glc-line);border-radius:var(--radius-sm);background:var(--glc-bg-2);padding:.55rem .65rem .6rem;transition:border-color .2s var(--ease),background .2s var(--ease);overflow:hidden}.agent:before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--glc-dim);opacity:.5}.agent__top{display:flex;align-items:center;gap:.4rem}.agent__glyph{font-size:.8rem;color:var(--glc-muted)}.agent__code{font-family:var(--mono);font-size:.58rem;color:var(--glc-dim);letter-spacing:.08em;margin-left:auto}.agent__name{font-family:var(--mono);font-size:.76rem;font-weight:700;letter-spacing:.04em}.agent__role{font-size:.7rem;color:var(--glc-muted);margin-top:.1rem}.agent__focus{font-family:var(--mono);font-size:.6rem;color:var(--glc-dim);margin-top:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.agent[data-state=queued]{border-color:#4cc9ff4d}.agent[data-state=queued]:before{background:var(--glc-cyan);opacity:.7}.agent[data-state=running]{border-color:#ffc25c8c;background:#ffc25c0f}.agent[data-state=running]:before{background:var(--glc-amber);opacity:1;animation:pulse 1.1s infinite}.agent[data-state=done]{border-color:#39e08a73}.agent[data-state=done]:before{background:var(--glc-green);opacity:1}.agent[data-state=failed]{border-color:#ff7a8a80}.agent[data-state=failed]:before{background:var(--glc-rose);opacity:1}.logbox{border:1px solid var(--glc-line);border-radius:var(--radius);background:var(--glc-bg-2);overflow:hidden}.logbox__head{display:flex;align-items:center;gap:.8rem;padding:.55rem .9rem;border-bottom:1px solid var(--glc-line);background:var(--glc-surface)}.logbox h3{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glc-muted);font-weight:500}.meter{margin-left:auto;font-family:var(--mono);font-size:.66rem;color:var(--glc-dim)}.log{list-style:none;margin:0;padding:.6rem .9rem;max-height:260px;overflow-y:auto;font-family:var(--mono);font-size:.74rem;line-height:1.75}.log li{display:flex;gap:.6rem;color:var(--glc-muted)}.log li:before{content:attr(data-t);color:var(--glc-dim);flex:none}.log li[data-kind=phase]{color:var(--glc-cyan)}.log li[data-kind=ok]{color:var(--glc-green)}.log li[data-kind=warn]{color:var(--glc-amber)}.log li[data-kind=error]{color:var(--glc-rose)}.output{margin-top:1.6rem;scroll-margin-top:84px}.output__head{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--glc-line);padding-bottom:.7rem}.tabs{display:flex;gap:.25rem;margin-left:auto;flex-wrap:wrap}.tabs button{background:transparent;border:1px solid transparent;border-radius:var(--radius-sm);padding:.35rem .8rem;cursor:pointer;font-size:.78rem;color:var(--glc-muted)}.tabs button[aria-selected=true]{background:var(--glc-surface);border-color:var(--glc-line-2);color:var(--glc-text)}.count{font-family:var(--mono);font-size:.66rem;background:var(--glc-surface-2);border-radius:999px;padding:0 .35rem}.panel{padding-top:.9rem}.panel__bar{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem}.panel__note{font-size:.72rem;color:var(--glc-dim)}.doc{margin:0;padding:1rem 1.1rem;background:var(--glc-bg-2);border:1px solid var(--glc-line);border-radius:var(--radius);font-size:.78rem;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:70vh;overflow-y:auto}.doc:empty:after{content:"awaiting mission output…";color:var(--glc-dim)}.files{display:grid;gap:.7rem}.file{border:1px solid var(--glc-line);border-radius:var(--radius);background:var(--glc-bg-2);overflow:hidden}.file__head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.5rem .8rem;background:var(--glc-surface);border-bottom:1px solid var(--glc-line)}.file__path{font-family:var(--mono);font-size:.76rem;font-weight:700;color:var(--glc-green);word-break:break-all}.file__lang{font-family:var(--mono);font-size:.62rem;color:var(--glc-dim);text-transform:uppercase;letter-spacing:.1em}.file__acts{margin-left:auto;display:flex;gap:.3rem}.file pre{margin:0;padding:.85rem 1rem;overflow-x:auto;font-size:.75rem;line-height:1.65;max-height:460px}.roster{position:fixed;top:0;right:0;bottom:0;z-index:60;width:min(440px,92vw);background:var(--glc-bg-2);border-left:1px solid var(--glc-line-2);display:flex;flex-direction:column;box-shadow:-30px 0 60px #0000008c;animation:slideIn .28s var(--ease)}@keyframes slideIn{0%{transform:translate(100%)}to{transform:none}}.roster__head{display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;border-bottom:1px solid var(--glc-line)}.roster__head h2{font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--glc-muted)}.roster__head span{color:var(--glc-green)}.roster__head .btn{margin-left:auto}.roster__tools{padding:.8rem 1rem;border-bottom:1px solid var(--glc-line)}#rosterSearch{width:100%;background:var(--glc-bg);border:1px solid var(--glc-line);border-radius:var(--radius-sm);padding:.5rem .7rem;font-family:var(--mono);font-size:.78rem}.roster__divs{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.6rem}.roster__divs button{background:transparent;border:1px solid var(--glc-line);color:var(--glc-dim);border-radius:999px;padding:.2rem .55rem;font-size:.66rem;cursor:pointer}.roster__divs button[aria-pressed=true]{color:var(--glc-green);border-color:#39e08a73;background:#39e08a14}.roster__list{overflow-y:auto;padding:.6rem 1rem 2rem;display:grid;gap:.4rem}.rosterItem{border:1px solid var(--glc-line);border-radius:var(--radius-sm);padding:.5rem .6rem;background:var(--glc-bg)}.rosterItem__top{display:flex;align-items:center;gap:.45rem}.rosterItem__name{font-family:var(--mono);font-size:.74rem;font-weight:700}.rosterItem__code{margin-left:auto;font-family:var(--mono);font-size:.58rem;color:var(--glc-dim)}.rosterItem__role{font-size:.7rem;color:var(--glc-muted)}.rosterItem__brief{font-size:.7rem;color:var(--glc-dim);margin-top:.2rem}.rosterItem__phase{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--glc-cyan)}.scrim{position:fixed;inset:0;z-index:50;background:#030508ad;backdrop-filter:blur(2px)}.modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:1rem;background:#030508b8;backdrop-filter:blur(4px)}.modal__card{width:min(520px,100%);background:var(--glc-bg-2);border:1px solid var(--glc-line-2);border-radius:var(--radius);padding:1.4rem}.modal__card h2{font-size:1.05rem;margin-bottom:.7rem}.modal__body{color:var(--glc-muted);font-size:.82rem;margin:0 0 .7rem}.modal__body code{color:var(--glc-cyan);font-size:.95em}.modal__warn{font-size:.78rem;color:var(--glc-amber);background:#ffc25c12;border:1px solid rgba(255,194,92,.25);border-radius:var(--radius-sm);padding:.6rem .7rem;margin:0 0 .9rem}#keyInput{width:100%;background:var(--glc-bg);border:1px solid var(--glc-line);border-radius:var(--radius-sm);padding:.6rem .7rem;font-family:var(--mono);font-size:.82rem}.modal__actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}.foot{border-top:1px solid var(--glc-line);padding:1.4rem clamp(1rem,3vw,2rem);color:var(--glc-dim);font-size:.74rem}.foot p{margin:0;max-width:70ch}@media (max-width: 640px){.hud{gap:.6rem}.hud__status{order:3;width:100%}.console__title{font-size:1.6rem}.agents{grid-template-columns:1fr}.tabs{width:100%;margin-left:0}.btn--go{width:100%;justify-content:center}}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◉</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#mission">Skip to the mission console</a>
+
+<header class="hud">
+  <div class="hud__brand">
+    <span class="hud__mark" aria-hidden="true">◉</span>
+    <span class="hud__name">
+      <b>GOLOCODE</b>
+      <i>100-agent coding AI</i>
+    </span>
+  </div>
+
+  <div class="hud__status" role="status" aria-live="polite">
+    <span class="pill pill--live"><span class="dot"></span><b id="fleetCount">100</b> agents online</span>
+    <span class="pill" id="enginePill">engine: local blueprint</span>
+  </div>
+
+  <div class="hud__actions">
+    <button type="button" class="btn btn--ghost" id="rosterBtn" aria-expanded="false" aria-controls="roster">Roster</button>
+    <button type="button" class="btn btn--ghost" id="keyBtn">API key</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ MISSION CONSOLE ============ -->
+  <section class="console" id="mission" aria-labelledby="missionTitle">
+    <h1 id="missionTitle" class="console__title">
+      Give it any coding task.<br><span>A squad assembles for it.</span>
+    </h1>
+
+    <div class="field">
+      <label for="task" class="field__label">Mission</label>
+      <textarea id="task" rows="4" spellcheck="false"
+        placeholder="e.g. build a physics-driven landing page with a canvas hero, or: my Express API leaks memory under load — find it and fix it"></textarea>
+      <p class="field__hint">
+        <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to launch. Paste code, error logs, or a whole file — the router reads all of it.
+      </p>
+    </div>
+
+    <div class="presets" id="presets" aria-label="Example missions">
+      <button type="button" class="chip" data-preset="Build a creative landing page with a WebGL shader hero, particles that react to the cursor, and sound that fades in on scroll.">creative landing page</button>
+      <button type="button" class="chip" data-preset="Build a REST API for a task manager: auth, projects, tasks, Postgres schema, and tests.">rest api + auth</button>
+      <button type="button" class="chip" data-preset="My React app takes 8 seconds to load on mobile. Find what is slow and fix it.">fix slow app</button>
+      <button type="button" class="chip" data-preset="Audit this login form for security holes and fix every one you find.">security audit</button>
+      <button type="button" class="chip" data-preset="Build a small 2D platformer in a single HTML file with tight controls, coyote time, and screen shake.">make a game</button>
+      <button type="button" class="chip" data-preset="Build a RAG assistant over our markdown docs: chunking, retrieval, citations, and an eval set.">rag assistant</button>
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <span class="control__label" id="fleetLabel">Fleet size</span>
+        <div class="seg" role="radiogroup" aria-labelledby="fleetLabel" id="fleetSeg">
+          <button type="button" role="radio" aria-checked="false" data-size="5">Strike<b>5</b></button>
+          <button type="button" role="radio" aria-checked="true"  data-size="12">Squad<b>12</b></button>
+          <button type="button" role="radio" aria-checked="false" data-size="30">Wing<b>30</b></button>
+          <button type="button" role="radio" aria-checked="false" data-size="100">Full fleet<b>100</b></button>
+        </div>
+      </div>
+
+      <div class="control">
+        <label class="control__label" for="engine">Engine</label>
+        <select id="engine">
+          <option value="local" selected>Local blueprint — no key, no model calls</option>
+          <option value="live">Live — run the squad on Claude</option>
+        </select>
+      </div>
+
+      <div class="control control--live" hidden>
+        <label class="control__label" for="model">Model</label>
+        <select id="model"></select>
+      </div>
+
+      <div class="control control--live" hidden>
+        <label class="control__label" for="depth">Depth</label>
+        <select id="depth">
+          <option value="fast">Fast — low effort, fewest tokens</option>
+          <option value="standard" selected>Standard</option>
+          <option value="deep">Deep — high effort</option>
+          <option value="max">Maximum — highest effort, highest cost</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="launch">
+      <button type="button" class="btn btn--go" id="launchBtn">
+        <span class="btn__glyph" aria-hidden="true">▶</span> Launch mission
+      </button>
+      <button type="button" class="btn btn--stop" id="cancelBtn" hidden>Cancel run</button>
+      <p class="launch__note" id="launchNote">Routing preview updates as you type.</p>
+    </div>
+  </section>
+
+  <!-- ============ FLEET OVERVIEW (empty state) ============ -->
+  <section class="fleet" id="fleetOverview" aria-labelledby="fleetTitle">
+    <div class="fleet__head">
+      <h2 id="fleetTitle">The fleet</h2>
+      <p class="fleet__lead">Ten divisions, ten specialists each. Type a task and the router
+        assembles the squad that fits it — every agent below is available to any mission.</p>
+    </div>
+    <div class="fleetGrid" id="fleetGrid"></div>
+  </section>
+
+  <!-- ============ SQUAD READOUT ============ -->
+  <section class="readout" id="readout" aria-labelledby="readoutTitle">
+    <div class="readout__head">
+      <h2 id="readoutTitle">Squad</h2>
+      <div class="profileStrip" id="profileStrip"></div>
+    </div>
+
+    <div class="waves" id="waves"></div>
+
+    <div class="logbox">
+      <div class="logbox__head">
+        <h3>Mission log</h3>
+        <span class="meter" id="meter"></span>
+      </div>
+      <ol class="log" id="log" aria-live="polite" aria-relevant="additions"></ol>
+    </div>
+  </section>
+
+  <!-- ============ OUTPUT ============ -->
+  <section class="output" id="output" hidden aria-labelledby="outputTitle">
+    <div class="output__head">
+      <h2 id="outputTitle">Deliverable</h2>
+      <div class="tabs" role="tablist" aria-label="Deliverable views">
+        <button type="button" role="tab" id="tab-brief" aria-controls="panel-brief" aria-selected="true">Briefing</button>
+        <button type="button" role="tab" id="tab-files" aria-controls="panel-files" aria-selected="false" tabindex="-1">Files <span class="count" id="fileCount">0</span></button>
+        <button type="button" role="tab" id="tab-prompt" aria-controls="panel-prompt" aria-selected="false" tabindex="-1">Handoff prompt</button>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-brief" role="tabpanel" aria-labelledby="tab-brief" tabindex="0">
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-copy="brief">Copy markdown</button>
+        <button type="button" class="btn btn--mini" data-download="brief">Download .md</button>
+      </div>
+      <pre class="doc" id="briefDoc"></pre>
+    </div>
+
+    <div class="panel" id="panel-files" role="tabpanel" aria-labelledby="tab-files" tabindex="0" hidden>
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-download="bundle">Download all as one file</button>
+      </div>
+      <div class="files" id="files"></div>
+    </div>
+
+    <div class="panel" id="panel-prompt" role="tabpanel" aria-labelledby="tab-prompt" tabindex="0" hidden>
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-copy="prompt">Copy prompt</button>
+        <span class="panel__note">Paste this into Claude, Claude Code, or any assistant to run the same squad without a key.</span>
+      </div>
+      <pre class="doc" id="promptDoc"></pre>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ ROSTER DRAWER ============ -->
+<aside class="roster" id="roster" hidden aria-label="Full agent roster">
+  <div class="roster__head">
+    <h2>The fleet <span id="rosterCount">100</span></h2>
+    <button type="button" class="btn btn--ghost" id="rosterClose" aria-label="Close roster">✕</button>
+  </div>
+  <div class="roster__tools">
+    <label class="sr-only" for="rosterSearch">Search agents</label>
+    <input type="search" id="rosterSearch" placeholder="search a skill, role, or codename…" autocomplete="off">
+    <div class="roster__divs" id="rosterDivs"></div>
+  </div>
+  <div class="roster__list" id="rosterList"></div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<!-- ============ API KEY DIALOG ============ -->
+<div class="modal" id="keyModal" hidden role="dialog" aria-modal="true" aria-labelledby="keyTitle">
+  <div class="modal__card">
+    <h2 id="keyTitle">Anthropic API key</h2>
+    <p class="modal__body">
+      Needed only for the <b>Live</b> engine. The key is stored in this browser's
+      localStorage and sent directly to <code>api.anthropic.com</code> — GOLOCODE has no
+      server of its own.
+    </p>
+    <p class="modal__warn">
+      Anything stored in a browser is readable by anything else running in that browser.
+      Use a key with a spend limit, never a shared or production key, and clear it when you are done.
+    </p>
+    <label class="sr-only" for="keyInput">API key</label>
+    <input type="password" id="keyInput" placeholder="sk-ant-..." autocomplete="off" spellcheck="false">
+    <div class="modal__actions">
+      <button type="button" class="btn btn--go" id="keySave">Save key</button>
+      <button type="button" class="btn btn--ghost" id="keyClear">Clear stored key</button>
+      <button type="button" class="btn btn--ghost" id="keyCancel">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  <p>
+    GOLOCODE — 100 specialist agents, one mission at a time.
+    Local blueprint runs entirely in your browser; live runs go to the Claude API with your own key.
+  </p>
+</footer>
+
+<script>
+(function(o){"use strict";var a=o.GOLOCODE=o.GOLOCODE||{},r=[{id:"recon",name:"RECON",label:"Understand",glyph:"◉",blurb:"Read the request, pin down scope, surface the unknowns."},{id:"design",name:"DESIGN",label:"Architect",glyph:"◈",blurb:"Choose the shape of the solution before a line is written."},{id:"build",name:"BUILD",label:"Implement",glyph:"⬢",blurb:"Write the actual code, file by file."},{id:"verify",name:"VERIFY",label:"Prove",glyph:"⛨",blurb:"Break it on purpose: tests, security, performance, review."},{id:"ship",name:"SHIP",label:"Deliver",glyph:"✦",blurb:"Docs, release path, and the last mile to production."}],n=[{id:"core",name:"Core Engineering",glyph:"⬢",accent:"--glc-green",blurb:"The load-bearing walls: architecture, APIs, data, services."},{id:"creative",name:"Creative Code Lab",glyph:"✺",accent:"--glc-violet",blurb:"Code as a medium — shaders, motion, physics, sound, play."},{id:"product",name:"Product & Experience",glyph:"◈",accent:"--glc-cyan",blurb:"What gets built, for whom, and how it feels to use."},{id:"intel",name:"Data & Intelligence",glyph:"⟁",accent:"--glc-amber",blurb:"Data pipelines, models, retrieval, evals, agent design."},{id:"infra",name:"Infrastructure",glyph:"⬗",accent:"--glc-cyan",blurb:"Where the code runs and how it gets there safely."},{id:"quality",name:"Quality & Verification",glyph:"◬",accent:"--glc-green",blurb:"Proof that it works — and keeps working."},{id:"guard",name:"Security",glyph:"⛨",accent:"--glc-rose",blurb:"Assume someone hostile is reading your code. They are."},{id:"speed",name:"Performance",glyph:"⚡",accent:"--glc-amber",blurb:"Milliseconds, megabytes, and the cost of both."},{id:"frontier",name:"Platforms & Systems",glyph:"⬡",accent:"--glc-violet",blurb:"Mobile, desktop, embedded, compilers, engines, distributed."},{id:"ops",name:"Delivery & Craft",glyph:"✦",accent:"--glc-rose",blurb:"Docs, refactors, migrations, planning, teaching."}],c={core:[["KEYSTONE","Systems Architect","design","architecture|system design|scalability|monolith|microservice|structure|boundaries|design a system","Draws the boxes and the arrows before anyone writes a line.","You are KEYSTONE, a systems architect. Decide the overall shape: components, boundaries, data flow, and the one architectural decision that matters most here. Name the trade-off you accepted and what it costs."],["LATTICE","API Designer","design","api|rest|graphql|endpoint|contract|openapi|versioning|interface|schema","Designs interfaces that survive their second version.","You are LATTICE, an API designer. Specify the interface: routes or function signatures, request/response shapes, status codes, pagination, and error contract. Design for a version 2 that does not break version 1."],["FORGE","Backend Engineer","build","backend|server|service|node|python|go|java|business logic|handler|worker","Writes the server-side code that does the actual work.","You are FORGE, a backend engineer. Write the server-side implementation: handlers, services, validation, error paths. Real code, no pseudocode, with the unhappy paths handled."],["PRISM","Frontend Engineer","build","frontend|ui|react|vue|svelte|dom|component|spa|html|css|browser","Turns the design into components that behave under real input.","You are PRISM, a frontend engineer. Write the client-side implementation: markup, styles, components, state wiring, loading and error states. Keep it accessible and responsive by default."],["SPAN","Fullstack Engineer","build","fullstack|crud|feature|end to end|wire up|connect frontend|app","Connects both ends so a feature works from click to database.","You are SPAN, a fullstack engineer. Wire the feature end to end: client call, transport, server handler, persistence, and the response rendered back. Call out every seam where the two halves can drift."],["VAULTKEEP","Database Engineer","design","database|sql|schema|postgres|mysql|mongo|migration|index|table|query|orm","Owns the schema, the migrations, and the indexes you forgot.","You are VAULTKEEP, a database engineer. Define the schema, keys, constraints, indexes, and the migration path. Flag anything that will hurt once the table has ten million rows."],["RELAY","Realtime Engineer","build","websocket|realtime|streaming|pubsub|sse|live|socket|push|multiplayer|collaborative","Handles anything that has to arrive now, not on refresh.","You are RELAY, a realtime engineer. Design and implement the live channel: transport choice, message format, reconnect and backoff, ordering, and what happens to state when a client drops."],["MORTAR","State Architect","design","state|redux|store|data flow|consistency|sync|offline|source of truth","Decides where truth lives and who is allowed to change it.","You are MORTAR, a state architect. Define the single source of truth, what is derived, what is cached, and how conflicting writes resolve. Prefer fewer states that cannot contradict each other."],["SOCKET","Integration Engineer","build","third party|webhook|sdk|payment|stripe|integration|external api|oauth flow|import","Talks to other people's systems and plans for their outages.","You are SOCKET, an integration engineer. Implement the external integration: auth, request shape, retries with backoff, idempotency, webhook verification, and a degraded mode for when the provider is down."],["BEDROCK","Domain Modeler","recon","domain|entities|business rules|requirements|model the problem|ubiquitous language|rules","Names the nouns and verbs of the problem before coding starts.","You are BEDROCK, a domain modeler. Extract the entities, their relationships, the invariants that must always hold, and the vocabulary the code should use. Ask the questions the request left unanswered."]],creative:[["AURORA","Creative Technologist","design","creative|experimental|interactive|installation|art|wow|unusual|playful|demo|showpiece","Finds the version of the idea that makes people stop scrolling.","You are AURORA, a creative technologist. Propose the concept with the highest impact-to-effort ratio, then describe the one moment that makes it memorable and exactly how it is produced technically."],["SHADERSMITH","Shader Artist","build","shader|glsl|webgl|fragment|raymarching|gpu|vertex|post processing|visual effect","Writes GPU code that paints light instead of pixels.","You are SHADERSMITH, a shader artist. Write working shader code with named uniforms, explain the maths of the effect in two lines, and give a cheap fallback for weak GPUs."],["KINETIC","Motion Engineer","build","animation|motion|transition|easing|tween|scroll|parallax|keyframe|spring","Makes things move with weight instead of just moving.","You are KINETIC, a motion engineer. Specify durations, easing curves, and stagger, implement them, and honour prefers-reduced-motion in the same code path."],["PARTICLE","Generative Artist","build","generative|procedural|noise|fractal|particles|random|seed|pattern|flow field","Grows visuals from algorithms and a seeded random number.","You are PARTICLE, a generative artist. Write the generative system: seeded randomness so results reproduce, the parameters worth exposing, and the range where output stays beautiful."],["GRAVITY","Physics Coder","build","physics|collision|simulation|rigid body|gravity|cloth|ragdoll|bounce|friction|verlet","Simulates the world with a fixed timestep and no regrets.","You are GRAVITY, a physics programmer. Implement the simulation with a fixed timestep, stable integration, and collision resolution that does not explode. State the tuning constants and their safe ranges."],["RESONANCE","Audio Engineer","build","audio|sound|web audio|synth|music|dsp|mixing|sfx|voice|waveform","Builds the layer people notice only when it is missing.","You are RESONANCE, an audio engineer. Implement the audio graph: sources, gain staging, effects, and the user-gesture unlock. Keep latency low and never start audio without consent."],["PIXELWRIGHT","Game Feel Engineer","build","game|juice|hitstop|screenshake|feedback|feel|responsive controls|input buffer|combo","Tunes the 80 milliseconds that decide if a game feels good.","You are PIXELWRIGHT, a game feel engineer. Add the feedback layer: input buffering, coyote time, hitstop, shake, and particles. Give exact frame counts, and keep every effect skippable."],["VOXEL","3D / WebGL Engineer","build","three.js|3d|mesh|scene|camera|gltf|webgpu|lighting|model|render pipeline","Builds scenes that hold 60fps on a laptop from 2019.","You are VOXEL, a 3D engineer. Set up the scene graph, camera, lighting, and asset loading, with a draw-call and triangle budget stated up front."],["TYPEFLOW","Creative Layout Coder","build","typography|svg|canvas layout|poster|grid|editorial|kinetic type|generative layout","Treats type and grid as the interface, not the decoration.","You are TYPEFLOW, a creative layout coder. Build the layout system: type scale, grid, rhythm, and the responsive behaviour that keeps the composition intact on a phone."],["DREAMSTATE","Concept Prototyper","recon","prototype|concept|idea|spike|explore|proof of concept|what if|brainstorm|sketch","Builds the throwaway version that answers the scary question first.","You are DREAMSTATE, a concept prototyper. Identify the riskiest assumption and design the smallest prototype that proves or kills it, with a hard time budget."]],product:[["COMPASS","Product Strategist","recon","product|mvp|scope|roadmap|user story|requirements|priority|feature set|goal","Cuts the scope to what actually ships this week.","You are COMPASS, a product strategist. State the user, the job to be done, and the smallest version that delivers it. List explicitly what is out of scope for v1."],["ATLAS-UX","UX Architect","design","ux|flow|wireframe|information architecture|journey|navigation|screens|steps","Maps the path a person takes before the pixels exist.","You are ATLAS-UX, a UX architect. Map the flow screen by screen, including the empty, loading, error, and success states, and remove every step that is not load-bearing."],["PALETTE","UI Designer","design","ui design|visual|color|palette|spacing|aesthetic|look|theme|beautiful|style","Chooses the colours, spacing, and type that make it look intentional.","You are PALETTE, a UI designer. Define the visual system as tokens: colour roles, type scale, spacing scale, radii, elevation. Ensure contrast passes WCAG AA in both light and dark."],["SYSTEMA","Design System Engineer","build","design system|tokens|component library|theming|variants|reusable components|storybook","Turns one-off styles into components everyone reuses.","You are SYSTEMA, a design system engineer. Implement the components as a small system: tokens first, then primitives, then compositions. Every variant must be a prop, never a copy."],["OPENHAND","Accessibility Engineer","verify","accessibility|a11y|aria|screen reader|contrast|keyboard|focus|wcag|alt text|inclusive","Tests with a keyboard and a screen reader, not with good intentions.","You are OPENHAND, an accessibility engineer. Audit and fix: semantic structure, keyboard path, focus visibility, ARIA only where semantics fall short, contrast, and motion sensitivity. Cite the specific WCAG criterion for each fix."],["WORDSMITH","UX Writer","ship","copy|microcopy|labels|error messages|tone|wording|naming|text|voice","Writes the eleven words that stop a support ticket.","You are WORDSMITH, a UX writer. Write the interface copy: labels, empty states, and errors that say what happened and what to do next. No blame, no jargon, no exclamation marks."],["ONBOARD","Onboarding Engineer","build","onboarding|first run|tutorial|empty state|activation|setup wizard|getting started|welcome","Designs the first 60 seconds so nobody leaves confused.","You are ONBOARD, an onboarding engineer. Design the first-run experience: what is shown before any data exists, what is deferred, and the single action that gets the user to first value."],["LENS","User Research Analyst","recon","research|feedback|persona|usability|survey|interview|user needs|pain point","Asks who this is for and what they do today instead.","You are LENS, a user researcher. Describe the target user, their current workaround, and the three questions whose answers would change the design. Separate what is known from what is assumed."],["FUNNEL","Growth Engineer","ship","analytics|conversion|ab test|funnel|seo|retention|tracking|metrics|share|viral","Instruments the product so decisions stop being guesses.","You are FUNNEL, a growth engineer. Define the events worth tracking, the one north-star metric, and the instrumentation code. Respect privacy: no PII in event payloads."],["HARMONY","Interaction Designer","design","interaction|micro interaction|affordance|gesture|hover|drag|responsive behavior|feedback","Decides what every hover, drag, and long-press promises.","You are HARMONY, an interaction designer. Specify each interactive state (rest, hover, focus, active, disabled, loading), the touch target sizes, and the gesture fallbacks for keyboard and pointer."]],intel:[["ORACLE","ML Engineer","build","machine learning|model|training|inference|pytorch|sklearn|classifier|regression|neural network","Trains the model and knows when not to train one.","You are ORACLE, an ML engineer. Choose the simplest method that can work, define features, training and validation split, and the metric that decides success. Say plainly when a heuristic beats a model here."],["CONDUIT","Data Engineer","build","etl|pipeline|data warehouse|ingestion|batch|airflow|dbt|parquet|data flow|scraping","Moves data between systems without losing rows.","You are CONDUIT, a data engineer. Design the pipeline: source, schema contract, transformation, sink, idempotent reruns, and how late or malformed records are handled."],["SIGIL","Prompt Engineer","design","prompt|llm|system prompt|instruction|few shot|claude|gpt|ai assistant|chatbot|context window","Writes the instructions that make a model behave predictably.","You are SIGIL, a prompt engineer. Write the system prompt and the input format, state the output contract exactly, and list the failure modes the prompt must defend against."],["LIBRARIAN","RAG Architect","design","rag|retrieval|embedding|vector|chunking|semantic search|knowledge base|citation|index documents","Gets the right five paragraphs in front of the model.","You are LIBRARIAN, a retrieval architect. Specify chunking, embedding choice, index, hybrid retrieval, reranking, and citation format. State how you would measure retrieval quality before generation quality."],["PLUMBLINE","Eval Engineer","verify","eval|benchmark|grading|rubric|llm judge|quality measurement|test set|accuracy","Builds the scoreboard that proves the change helped.","You are PLUMBLINE, an eval engineer. Define the eval set, the grading method, and the baseline. Every claimed improvement must be reproducible with a command."],["SIFT","Data Analyst","recon","analysis|metrics|statistics|insight|dashboard|report|aggregate|trend|dataset","Reads the data and tells you which number is lying.","You are SIFT, a data analyst. Identify the questions the data can answer, the aggregations needed, and the confounds that would make the result misleading."],["CIPHER-AI","NLP Engineer","build","nlp|text processing|tokenizer|classification|extraction|sentiment|parsing text|language","Turns messy human text into structured fields.","You are CIPHER-AI, an NLP engineer. Implement the text pipeline: normalisation, tokenisation, extraction or classification, and confidence handling for ambiguous input."],["IRIS","Computer Vision Engineer","build","vision|image|opencv|detection|ocr|segmentation|camera|photo|video analysis","Teaches the machine what it is looking at.","You are IRIS, a computer vision engineer. Define the preprocessing, the model or classical method, and the postprocessing, with the accuracy/latency trade-off stated for the target device."],["FOUNDRY-ML","MLOps Engineer","ship","mlops|model deploy|feature store|drift|serving|model registry|retraining|inference api","Ships models and watches them decay in production.","You are FOUNDRY-ML, an MLOps engineer. Define packaging, versioning, serving, rollback, and drift monitoring. A model with no rollback path is not deployed, it is gambled."],["WEAVER","Agent Architect","design","agent|tool use|orchestration|multi agent|workflow|automation|mcp|function calling|pipeline of prompts","Designs how many models, tools, and loops the job really needs.","You are WEAVER, an agent architect. Choose the simplest tier that works: single call, workflow, or agent loop. Define tools, stopping conditions, and the failure path when a tool errors."]],infra:[["GIRDER","Platform Architect","design","platform|infrastructure|cloud|aws|gcp|azure|hosting|deployment architecture|region","Picks where this lives and what it costs to keep alive.","You are GIRDER, a platform architect. Choose the hosting shape and justify it against load, budget, and team size. Name the cheapest option that still meets the requirements."],["PIPEWORK","CI/CD Engineer","ship","ci|cd|pipeline|github actions|build|deploy|automation|workflow file|gitlab","Automates the path from commit to production.","You are PIPEWORK, a CI/CD engineer. Write the pipeline config: cached install, lint, typecheck, test, build, deploy, with fast feedback first and secrets never echoed."],["CRATE","Container Engineer","ship","docker|container|image|compose|kubernetes|k8s|dockerfile|pod|helm","Packages the app so it runs the same everywhere.","You are CRATE, a container engineer. Write the container setup: multi-stage build, non-root user, pinned base image, small final layer, health check."],["TERRAFORMER","IaC Engineer","ship","terraform|infrastructure as code|provisioning|pulumi|cloudformation|resources|state file","Declares infrastructure so nobody clicks in a console again.","You are TERRAFORMER, an infrastructure-as-code engineer. Declare the resources, variables, and outputs, with remote state and a plan-before-apply workflow. No secrets in the repo."],["BEACON","Observability Engineer","verify","logging|tracing|metrics|monitoring|alerting|otel|dashboard|debug production|telemetry","Makes production explain itself at 3am.","You are BEACON, an observability engineer. Define structured logs, key metrics, traces, and the three alerts worth waking someone for. Every alert needs a runbook line."],["MESHLINE","Network Engineer","design","network|dns|load balancer|cdn|proxy|tls|routing|domain|https|firewall","Routes packets and terminates TLS without surprises.","You are MESHLINE, a network engineer. Specify DNS, TLS, load balancing, timeouts, and retry policy. Make every hop's failure mode explicit."],["LEDGER-OPS","FinOps Engineer","ship","cost|budget|spend|pricing|cheap|expensive|optimize cost|billing|free tier","Reads the bill before it arrives.","You are LEDGER-OPS, a FinOps engineer. Estimate the monthly cost by component at expected load, name the top cost driver, and give the change that cuts it most with least risk."],["SENTINEL-SRE","Reliability Engineer","verify","sre|uptime|slo|failover|resilience|incident|availability|backup|disaster recovery","Plans for the day one component simply stops.","You are SENTINEL-SRE, a reliability engineer. Set the SLO, identify single points of failure, and define degradation, backup, and restore. An untested restore is not a backup."],["EDGERUNNER","Edge / Serverless Engineer","build","serverless|lambda|edge function|worker|cloudflare|vercel|netlify|cold start|function as a service","Runs code close to users with no server to patch.","You are EDGERUNNER, an edge and serverless engineer. Implement the function with cold start, execution limits, and statelessness in mind, and say what must not run at the edge."],["HARBOR","Release Engineer","ship","release|versioning|changelog|rollout|feature flag|semver|tag|canary|rollback","Ships in small reversible steps.","You are HARBOR, a release engineer. Define versioning, changelog, rollout strategy, and the rollback command. Nothing ships without a way back."]],quality:[["PROOFWRIGHT","Test Architect","design","test strategy|coverage|test plan|pyramid|what to test|quality plan|testing approach","Decides what deserves a test and what does not.","You are PROOFWRIGHT, a test architect. Define the test layers and what belongs in each, target the risky paths, and explicitly list what is not worth testing here."],["UNIT-ZERO","Unit Test Engineer","verify","unit test|jest|pytest|vitest|mock|assertion|test case|spec|tdd","Writes the small fast tests that catch the dumb bugs.","You are UNIT-ZERO, a unit test engineer. Write runnable unit tests covering happy path, boundaries, and error cases. Test behaviour, not implementation detail."],["TRACER","Integration Test Engineer","verify","integration test|contract test|api test|fixture|database test|seed data|test container","Tests the seams where two correct components meet and fail.","You are TRACER, an integration test engineer. Write tests that exercise real boundaries with controlled fixtures, and make them deterministic and independently runnable."],["PUPPETEER","E2E Test Engineer","verify","e2e|playwright|cypress|selenium|browser test|user flow test|smoke test|automation test","Drives the real UI like an impatient user.","You are PUPPETEER, an end-to-end test engineer. Script the critical user journeys with resilient selectors and no arbitrary sleeps. Keep the suite small enough that people still run it."],["FUZZLORD","Property & Fuzz Tester","verify","fuzz|property based|edge case|invariant|hypothesis|random input|crash|malformed input","Feeds the code garbage until it admits a bug.","You are FUZZLORD, a property-based and fuzz tester. State the invariants that must hold for all inputs, generate hostile inputs, and report the minimal failing case."],["STRESSLINE","Load Test Engineer","verify","load test|stress|benchmark|throughput|k6|concurrent users|capacity|scale test|rps","Finds the number of users that breaks it.","You are STRESSLINE, a load test engineer. Define the load profile, the pass thresholds, and the script. Report the breaking point and the component that gave first."],["CHAOSWRIGHT","Chaos Engineer","verify","chaos|fault injection|failure mode|resilience test|kill process|network partition|timeout test","Turns things off on purpose during business hours.","You are CHAOSWRIGHT, a chaos engineer. List the failure injections worth running, the expected behaviour under each, and the blast radius limit for the experiment."],["REDPEN","Code Reviewer","verify","code review|readability|style|pr review|nit|feedback on code|improve code|clean","Reads the diff the way a tired teammate will.","You are REDPEN, a code reviewer. Review for correctness first, then clarity, then consistency. Every comment names the concrete failing case or the concrete improvement."],["LINTLORD","Static Analysis Engineer","verify","lint|eslint|type check|typescript|static analysis|formatter|prettier|types|strict mode","Makes the machine catch it before a human has to.","You are LINTLORD, a static analysis engineer. Configure the linters, formatters, and type checking so the class of bug is impossible, not merely discouraged."],["REGRESS","Regression Hunter","verify","regression|bug|reproduce|bisect|flaky|broke|used to work|error|stack trace|debug","Reproduces it first, then fixes it, then locks it down.","You are REGRESS, a regression hunter. Reproduce the failure deterministically, isolate the cause, fix it, and add the test that would have caught it. Never fix a bug you cannot reproduce."]],guard:[["BULWARK","Application Security Engineer","verify","security|vulnerability|xss|sql injection|csrf|owasp|sanitize|exploit|attack|injection","Reads your code looking for the way in.","You are BULWARK, an application security engineer. Audit for injection, XSS, CSRF, SSRF, insecure deserialisation, and broken access control. For each finding give the concrete exploit path and the fix."],["THREATCAST","Threat Modeler","design","threat model|attack surface|stride|risk|adversary|trust boundary|abuse case","Maps who would attack this and what they would want.","You are THREATCAST, a threat modeller. Identify assets, trust boundaries, plausible adversaries, and the top risks ranked by likelihood times impact. Propose one mitigation per risk."],["KEYRING","Cryptography Engineer","build","encryption|hashing|crypto|tls|signing|key management|password|bcrypt|argon2|random token","Uses the boring library instead of inventing a cipher.","You are KEYRING, a cryptography engineer. Use standard, vetted primitives with correct parameters. Never invent a scheme. Specify key storage, rotation, and what happens when a key leaks."],["SHROUD","Secrets Manager","ship","secrets|env vars|credentials|vault|api key|token storage|dotenv|key rotation|config","Keeps keys out of the repo, the logs, and the bundle.","You are SHROUD, a secrets engineer. Define where each secret lives, how it reaches the runtime, and how it is rotated. Flag any secret that would end up in client-side code or logs."],["CHAINWARD","Supply Chain Analyst","verify","dependencies|sbom|npm audit|cve|package|supply chain|lockfile|vendor|third party risk","Audits the 900 packages you did not read.","You are CHAINWARD, a supply chain analyst. Review dependencies for necessity, maintenance, and known CVEs. Recommend removals, pins, and the lockfile policy."],["GATEKEEP","Auth Engineer","build","auth|login|jwt|oauth|session|rbac|permission|signup|password reset|access control|roles","Owns who you are and what you are allowed to touch.","You are GATEKEEP, an authentication and authorisation engineer. Implement identity and access control with session handling, token lifetime, and server-side authorisation checks on every protected path."],["VEIL","Privacy Engineer","design","privacy|pii|gdpr|data retention|anonymization|personal data|consent|tracking|delete account","Collects the least data that still makes the product work.","You are VEIL, a privacy engineer. Classify the data collected, minimise it, define retention and deletion, and specify what is never logged."],["DECREE","Compliance Analyst","ship","compliance|soc2|audit|policy|license|legal|terms|regulation|hipaa|accessibility law","Knows which rules apply before a lawyer does.","You are DECREE, a compliance analyst. Identify the obligations that plausibly apply, the evidence each requires, and the gaps in the current design. Flag where professional advice is genuinely required."],["TRIPWIRE","Incident Responder","verify","incident|breach|forensics|postmortem|alert|compromised|leak|respond|on call","Has the plan ready before the bad day arrives.","You are TRIPWIRE, an incident responder. Define detection signals, the containment steps in order, the evidence to preserve, and the blameless postmortem template."],["HARDLINE","Secure Defaults Engineer","build","hardening|csp|headers|sandbox|least privilege|secure default|cors|iframe|permissions","Ships the safe configuration as the default one.","You are HARDLINE, a secure-defaults engineer. Set security headers, CSP, CORS, cookie flags, and least-privilege permissions so that the default configuration is the safe one."]],speed:[["STOPWATCH","Performance Profiler","verify","profiling|flamegraph|bottleneck|slow|latency|performance|speed up|optimize|hot path","Measures first so the fix lands where it matters.","You are STOPWATCH, a performance profiler. Identify how to measure, where the time actually goes, and the single hottest path. Never optimise anything you have not measured."],["MEMWARD","Memory Engineer","verify","memory|leak|gc|heap|allocation|out of memory|ram|retain|garbage collection","Finds the reference nobody meant to keep.","You are MEMWARD, a memory engineer. Locate retained references, allocation churn, and growth over time. Give the fix and the way to confirm the leak is closed."],["TRIMMER","Bundle Engineer","build","bundle size|tree shaking|code splitting|webpack|vite|lazy load|dependency size|minify","Deletes the 400KB nobody needed on first paint.","You are TRIMMER, a bundle engineer. Cut initial payload: split routes, defer non-critical code, replace heavy dependencies, and state the before/after byte budget."],["INDEXER","Query Optimizer","build","query|slow query|index|n+1|explain plan|database performance|join|full table scan","Turns a 4-second query into a 40-millisecond one.","You are INDEXER, a query optimiser. Read the access pattern, propose indexes, eliminate N+1s, and show the expected plan change."],["FRAMELOCK","Rendering Engineer","build","fps|render|reflow|repaint|raf|jank|smooth|frame rate|scroll performance|layout thrash","Protects the frame budget like it is 16 milliseconds. It is.","You are FRAMELOCK, a rendering engineer. Keep work off the main thread, batch reads and writes, animate compositor-friendly properties, and state the per-frame budget."],["PARALLEL","Concurrency Engineer","build","concurrency|thread|async|race condition|worker|lock|deadlock|parallel|queue|mutex","Makes things run at once without corrupting each other.","You are PARALLEL, a concurrency engineer. Identify shared mutable state, pick the synchronisation primitive, and prove the absence of the obvious race. Prefer message passing over locks."],["CACHEWRIGHT","Caching Engineer","design","cache|redis|memoize|cdn cache|invalidation|stale|ttl|etag|cache hit","Knows that invalidation is the actual problem.","You are CACHEWRIGHT, a caching engineer. Choose cache layer, key design, TTL, and invalidation trigger. State exactly when a user could see stale data and whether that is acceptable."],["BIGO","Algorithms Engineer","build","algorithm|complexity|data structure|sorting|search|graph|dynamic programming|efficient|big o","Replaces the nested loop with the right data structure.","You are BIGO, an algorithms engineer. Give the complexity of the current approach and the better one, implement it, and note the input size where the difference starts to matter."],["WIRESPEED","Network Performance Engineer","build","http|compression|payload size|prefetch|network latency|gzip|http2|request waterfall|cdn","Cuts round trips and bytes on the wire.","You are WIRESPEED, a network performance engineer. Reduce request count and payload size: compression, caching headers, preconnect, prefetch, and batching. Quantify the saving."],["LEANCORE","Mobile Performance Engineer","verify","battery|startup time|mobile performance|apk size|cold start|low end device|data usage|offline","Optimises for the cheap phone on a bad network.","You are LEANCORE, a mobile performance engineer. Target a low-end device and a 3G network: startup time, memory ceiling, battery cost, and offline behaviour."]],frontier:[["SWIFTHAND","iOS Engineer","build","ios|swift|swiftui|xcode|apple|iphone|ipad|app store|uikit","Builds for Apple platforms the way Apple intended.","You are SWIFTHAND, an iOS engineer. Write idiomatic Swift with the platform's own patterns for state, navigation, and lifecycle, and note the App Store requirements that affect the design."],["DROIDWRIGHT","Android Engineer","build","android|kotlin|jetpack|gradle|play store|compose|activity|fragment","Handles Android's fragmentation so users never see it.","You are DROIDWRIGHT, an Android engineer. Write idiomatic Kotlin with lifecycle-safe state, and call out the device and API-level differences that will bite."],["BRIDGEWORK","Cross-Platform Engineer","build","react native|flutter|expo|cross platform|one codebase|hybrid app|capacitor","Shares one codebase without shipping a lowest common denominator.","You are BRIDGEWORK, a cross-platform engineer. Decide what is shared and what must be native per platform, and implement the bridge for anything the framework does not cover."],["DESKWRIGHT","Desktop Engineer","build","desktop|electron|tauri|window|native app|menu bar|tray|file system access|installer","Builds apps that live in a window and a dock.","You are DESKWRIGHT, a desktop engineer. Handle windowing, menus, file system access, auto-update, and code signing, with the security boundary between renderer and main process respected."],["IRONCORE","Systems Engineer","build","rust|c|c++|memory safety|systems|low level|pointer|zig|borrow checker|performance critical","Writes the layer everything else stands on.","You are IRONCORE, a systems engineer. Write memory-safe, explicit code with ownership and error handling made visible, and justify every unsafe block or manual allocation."],["BYTESMITH","Compiler / DSL Engineer","build","compiler|parser|ast|dsl|grammar|interpreter|lexer|transpile|syntax|language design","Builds small languages and the tools that read them.","You are BYTESMITH, a compiler engineer. Define the grammar, the AST, and the evaluation or codegen step, with error messages that point at the exact source span."],["CIRCUIT","Embedded Engineer","build","embedded|firmware|arduino|iot|microcontroller|sensor|raspberry pi|esp32|gpio|hardware","Codes where there is no garbage collector to save you.","You are CIRCUIT, an embedded engineer. Work within the memory and power budget, handle interrupts and timing explicitly, and define behaviour on brownout and watchdog reset."],["TERMINAL","CLI Engineer","build","cli|command line|terminal|argv|shell|tui|script|bash|argument parsing|stdout","Builds tools that pipe, compose, and exit with the right code.","You are TERMINAL, a CLI engineer. Design the command surface, flags, stdin/stdout behaviour, exit codes, and --help text. Make it scriptable first and pretty second."],["ENGINEWRIGHT","Game Engine Engineer","build","unity|unreal|godot|game engine|entity component|scene|gameplay|level|prefab","Works inside the engine's grain instead of against it.","You are ENGINEWRIGHT, a game engine engineer. Use the engine's own architecture for update loops, scene structure, and asset pipeline, and budget the per-frame cost."],["BLOCKWRIGHT","Distributed Systems Engineer","design","distributed|consensus|queue|kafka|event driven|saga|eventual consistency|partition|replica|idempotency","Assumes the network is hostile, because it is.","You are BLOCKWRIGHT, a distributed systems engineer. Define message delivery guarantees, idempotency, ordering, and partition behaviour. State which CAP trade-off you took and why."]],ops:[["SCROLLKEEP","Technical Writer","ship","documentation|readme|docs|guide|api docs|explain how to use|manual|tutorial doc|comments","Writes the README the future maintainer actually needs.","You are SCROLLKEEP, a technical writer. Write documentation that starts with what it does and how to run it in under a minute, then the reference detail. Show a real command and its real output."],["TRAILHEAD","Developer Experience Engineer","ship","developer experience|setup|scripts|tooling|contributing|local dev|dx|onboarding developer|makefile","Makes `clone && run` work on the first try.","You are TRAILHEAD, a developer experience engineer. Reduce the steps from clone to running: scripts, sane defaults, seeded data, and one command that verifies the environment."],["CHISEL","Refactoring Engineer","build","refactor|clean up|technical debt|rename|extract|simplify|restructure|tidy|dry","Improves the shape without changing the behaviour.","You are CHISEL, a refactoring engineer. Change structure without changing behaviour, in steps small enough to verify, and state the characterisation test that proves equivalence."],["ARCHAEOLOGIST","Legacy Analyst","recon","legacy|old code|reverse engineer|undocumented|inherited codebase|what does this do|understand code","Reads unfamiliar code and reports what it truly does.","You are ARCHAEOLOGIST, a legacy analyst. Explain what the existing code actually does, including the parts that look wrong but are load-bearing. Separate observed behaviour from guessed intent."],["ROSETTA","Internationalization Engineer","build","i18n|localization|translation|rtl|locale|multi language|thai|unicode|date format|currency","Prepares the product for every language it will meet.","You are ROSETTA, an internationalisation engineer. Externalise strings, handle plurals, dates, numbers, and currency per locale, support RTL, and never concatenate translated fragments."],["PORTWRIGHT","Migration Engineer","design","migration|upgrade|port|version bump|framework switch|rewrite|move to|deprecated","Gets from the old thing to the new thing without a freeze.","You are PORTWRIGHT, a migration engineer. Plan an incremental migration with both systems coexisting, a reversible cutover, and a checkpoint after each step."],["TEMPO","Delivery Planner","recon","plan|milestone|estimate|breakdown|sprint|priority|timeline|order of work|schedule|steps","Breaks the work into pieces that can actually be finished.","You are TEMPO, a delivery planner. Break the work into ordered, independently shippable steps with a rough size for each, and put the riskiest piece first."],["COMMONS","Open Source Steward","ship","open source|license|community|contribution|governance|github|issue template|public repo","Prepares a repo strangers can contribute to.","You are COMMONS, an open source steward. Recommend the licence, contribution guide, issue templates, and code of conduct, and state what a first-time contributor needs to succeed."],["MENTOR","Code Explainer","ship","explain|teach|walkthrough|learning|beginner|how does it work|understand|why|study","Explains the code so the next person can change it.","You are MENTOR, a code explainer. Explain the solution in plain language, from the top down, naming the one concept the reader must understand to maintain it."],["NORTHSTAR","Mission Commander","ship","synthesis|decision|tradeoff|lead|final call|summary|overall|coordinate|what should i do","Merges every agent's findings into one deliverable and one decision.","You are NORTHSTAR, the mission commander. Merge the squad's findings into a single coherent deliverable. Where specialists disagree, make the call and state why. Deliver complete, runnable code, not advice about code."]]};function l(e){return e<10?"00"+e:e<100?"0"+e:""+e}var i=[];n.forEach(function(e){(c[e.id]||[]).forEach(function(t,d){i.push({num:i.length+1,id:e.id+"-"+(d+1),code:"GLC-"+l(i.length+1),codename:t[0],role:t[1],phase:t[2],tags:t[3].split("|"),brief:t[4],directive:t[5],division:e.id,divisionName:e.name,glyph:e.glyph,accent:e.accent,lead:t[0]==="NORTHSTAR"})})});var s={};i.forEach(function(e){s[e.id]=e}),a.PHASES=r,a.DIVISIONS=n,a.AGENTS=i,a.LEAD=s["ops-10"],a.agentById=function(e){return s[e]||null},a.division=function(e){for(var t=0;t<n.length;t++)if(n[t].id===e)return n[t];return null},a.phase=function(e){for(var t=0;t<r.length;t++)if(r[t].id===e)return r[t];return null}})(window);
+
+(function(b){"use strict";var h=b.GOLOCODE=b.GOLOCODE||{},m=[{id:"creative",label:"Creative / Interactive Build",glyph:"✺",keys:"game|shader|animation|generative|art|creative|visual|interactive|canvas|particle|3d|webgl|physics|music|audio|demo|fun|beautiful|playful|experience",boost:["creative","product","speed"],anchors:"AURORA|KINETIC|PIXELWRIGHT|DREAMSTATE",weight:{recon:1,design:1.4,build:2.6,verify:1,ship:.8}},{id:"web",label:"Web Application",glyph:"◈",keys:"website|web app|landing page|html|css|frontend|react|vue|svelte|next|page|dashboard|form|responsive|ui|site",boost:["product","core","creative"],anchors:"PRISM|PALETTE|ATLAS-UX|COMPASS",weight:{recon:1,design:1.4,build:2.4,verify:1.2,ship:1}},{id:"service",label:"Backend Service / API",glyph:"⬢",keys:"api|backend|server|endpoint|microservice|rest|graphql|database|crud|auth|queue|service|webhook",boost:["core","guard","infra"],anchors:"LATTICE|FORGE|VAULTKEEP|BEDROCK",weight:{recon:1,design:1.8,build:2.2,verify:1.4,ship:1}},{id:"ai",label:"AI / Data System",glyph:"⟁",keys:"ai|llm|model|machine learning|agent|chatbot|rag|embedding|dataset|prompt|training|inference|neural|data pipeline|analytics",boost:["intel","core","quality"],anchors:"WEAVER|SIGIL|PLUMBLINE|SIFT",weight:{recon:1.2,design:1.8,build:2,verify:1.6,ship:.9}},{id:"mobile",label:"Mobile / Native App",glyph:"⬡",keys:"ios|android|mobile app|swift|kotlin|react native|flutter|phone|tablet|app store|play store",boost:["frontier","product","speed"],anchors:"SWIFTHAND|DROIDWRIGHT|BRIDGEWORK|LEANCORE",weight:{recon:1,design:1.4,build:2.4,verify:1.4,ship:1}},{id:"systems",label:"Systems / Low-Level",glyph:"⬗",keys:"rust|c\\+\\+|embedded|firmware|compiler|kernel|driver|memory safety|pointer|microcontroller|protocol|parser|interpreter",boost:["frontier","speed","quality"],anchors:"IRONCORE|BYTESMITH|PARALLEL|ARCHAEOLOGIST",weight:{recon:1,design:1.6,build:2.4,verify:1.6,ship:.7}},{id:"cli",label:"Tool / Automation",glyph:"▸",keys:"cli|command line|terminal|script|automate|automation|bot|cron|tool|scraper|converter|generator",boost:["frontier","ops","core"],anchors:"TERMINAL|TRAILHEAD|SCROLLKEEP|TEMPO",weight:{recon:1,design:1.2,build:2.4,verify:1.2,ship:1.1}},{id:"debug",label:"Debug / Repair",glyph:"⚠",keys:"bug|fix|error|broken|crash|debug|not working|fails|exception|stack trace|regression|issue|wrong output",boost:["quality","core","speed"],anchors:"REGRESS|STOPWATCH|ARCHAEOLOGIST|UNIT-ZERO",weight:{recon:1.6,design:.8,build:2,verify:2.4,ship:.6}},{id:"perf",label:"Performance Work",glyph:"⚡",keys:"slow|performance|optimize|optimise|speed up|faster|memory|lag|latency|bottleneck|bundle size|fps|scale",boost:["speed","quality","infra"],anchors:"STOPWATCH|MEMWARD|BIGO|ARCHAEOLOGIST",weight:{recon:1.4,design:1,build:2,verify:2.2,ship:.6}},{id:"security",label:"Security Review",glyph:"⛨",keys:"security|vulnerability|audit|penetration|secure|exploit|owasp|xss|injection|hardening|threat|encrypt",boost:["guard","quality","infra"],anchors:"BULWARK|THREATCAST|HARDLINE|ARCHAEOLOGIST",weight:{recon:1.4,design:1.4,build:1.2,verify:2.6,ship:.6}},{id:"refactor",label:"Refactor / Migration",glyph:"✧",keys:"refactor|migrate|migration|upgrade|port|legacy|clean up|rewrite|restructure|technical debt|modernize|convert",boost:["ops","quality","core"],anchors:"CHISEL|PORTWRIGHT|ARCHAEOLOGIST|PROOFWRIGHT",weight:{recon:1.6,design:1.6,build:2,verify:1.6,ship:.8}},{id:"infra",label:"Infrastructure / Delivery",glyph:"⬗",keys:"deploy|docker|kubernetes|ci|cd|pipeline|hosting|terraform|serverless|devops|release|monitoring|cloud",boost:["infra","guard","ops"],anchors:"PIPEWORK|CRATE|BEACON|TEMPO",weight:{recon:1,design:1.4,build:1.8,verify:1.4,ship:2.2}},{id:"explain",label:"Explain / Learn",glyph:"◉",keys:"explain|teach|how does|what is|understand|learn|walk me through|documentation|document|readme|tutorial|why does",boost:["ops","core","quality"],anchors:"MENTOR|SCROLLKEEP|ARCHAEOLOGIST|LENS",weight:{recon:2,design:1.4,build:1,verify:.8,ship:2}}],T={id:"general",label:"General Engineering",glyph:"◆",boost:["core","product","quality"],anchors:"KEYSTONE|TEMPO|REDPEN|SCROLLKEEP",weight:{recon:1.2,design:1.4,build:2.2,verify:1.4,ship:1}},L=[["JavaScript","javascript|js|node|nodejs|npm"],["TypeScript","typescript|ts|tsx"],["Python","python|py|django|flask|fastapi|pandas"],["React","react|jsx|next.js|nextjs"],["Vue","vue|nuxt"],["Svelte","svelte|sveltekit"],["HTML/CSS","html|css|tailwind|scss|sass"],["Go","golang"],["Rust","rust|cargo"],["Java","java|spring|kotlin"],["C/C++","c\\+\\+|cpp|clang"],["C#/.NET","c#|csharp|dotnet|.net|unity"],["PHP","php|laravel"],["Ruby","ruby|rails"],["Swift","swift|swiftui"],["SQL","sql|postgres|postgresql|mysql|sqlite"],["MongoDB","mongo|mongodb"],["Docker","docker|container"],["Three.js","three.js|threejs|webgl"],["Godot/Unreal","godot|unreal"]];function E(r){return(" "+String(r||"").toLowerCase()+" ").replace(/[^a-z0-9+#./฀-๿\s-]/g," ").replace(/\s+/g," ")}function k(r){return r.split(" ").filter(function(e){return e.length>1})}function y(r,e){return r.indexOf(" "+e+" ")!==-1||r.indexOf(" "+e+"s ")!==-1||r.indexOf(" "+e+",")!==-1}function S(r,e){for(var n=e.split("|"),o=0,s=0;s<n.length;s++){var t=n[s].replace(/\\/g,"");r.indexOf(" "+t)!==-1&&o++}return o}function O(r){var e=null,n=0,o=[];m.forEach(function(a){var l=S(r,a.keys);o.push({id:a.id,label:a.label,score:l}),l>n&&(n=l,e=a)});var s=n>0?e:T;o.sort(function(a,l){return l.score-a.score});var t=o[1]&&o[1].score>0&&o[1].id!==s.id?o[1]:null;return{profile:s,secondary:t,confidence:n}}function A(r){var e=[];return L.forEach(function(n){S(r,n[1])>0&&e.indexOf(n[0])===-1&&e.push(n[0])}),e}function w(r,e){var n=0,o=[];r.tags.forEach(function(t){var a=t.indexOf(" ")!==-1;if(a){e.norm.indexOf(" "+t)!==-1&&(n+=3+t.split(" ").length,o.push(t));return}if(y(e.norm,t))n+=3,o.push(t);else if(t.length>=6){for(var l=0;l<e.tokens.length;l++)if(e.tokens[l].indexOf(t)===0){n+=1.5,o.push(t);break}}}),e.norm.indexOf(" "+r.codename.toLowerCase())!==-1&&(n+=10,o.unshift("@"+r.codename)),r.role.toLowerCase().split(/[\s/]+/).forEach(function(t){t.length>=5&&y(e.norm,t)&&(n+=1.5)}),e.anchors.indexOf(r.codename)!==-1&&(n+=4,o.push("mission anchor"));var s=e.boost.indexOf(r.division);return s!==-1&&(n+=(2.5-s*.5)*(o.length?1:.35)),n+=.4,{score:n,matched:o.slice(0,3)}}function I(r,e){var n=h.PHASES.map(function(d){return d.id}),o=n.reduce(function(d,p){return d+(r[p]||1)},0),s={},t=0;n.forEach(function(d){var p=Math.max(1,Math.round((r[d]||1)/o*e));s[d]=p,t+=p});for(var a=n.slice().sort(function(d,p){return(r[p]||1)-(r[d]||1)}),l=0;t!==e&&l++<500;)for(var g=0;g<a.length&&t!==e;g++){var u=a[t<e?g:a.length-1-g];t<e?(s[u]++,t++):s[u]>1&&(s[u]--,t--)}return s}function P(r,e){var n=E(r),o={norm:n,tokens:k(n),boost:[],anchors:[]},s=O(n),t=s.profile;o.boost=t.boost||[],o.anchors=(t.anchors||"").split("|");var a=h.AGENTS.map(function(i){var c=w(i,o);return{agent:i,score:c.score,matched:c.matched}}).sort(function(i,c){return c.score!==i.score?c.score-i.score:i.agent.num-c.agent.num});e=Math.max(3,Math.min(h.AGENTS.length,e|0));var l={};h.PHASES.forEach(function(i){l[i.id]=[]}),a.forEach(function(i){l[i.agent.phase].push(i)});var g=I(t.weight,e),u=[],d={};h.PHASES.forEach(function(i){for(var c=l[i.id],v=Math.min(g[i.id],c.length),f=0;f<v;f++)u.push(c[f]),d[c[f].agent.id]=!0});for(var p=0;p<a.length&&u.length<e;p++)d[a[p].agent.id]||(u.push(a[p]),d[a[p].agent.id]=!0);d[h.LEAD.id]||(u.pop(),u.push(a.filter(function(i){return i.agent.id===h.LEAD.id})[0])),u.sort(function(i,c){var v=R(i.agent.phase),f=R(c.agent.phase);return v!==f?v-f:c.score!==i.score?c.score-i.score:i.agent.num-c.agent.num});var C=h.PHASES.map(function(i){return{phase:i,members:u.filter(function(c){return c.agent.phase===i.id})}}).filter(function(i){return i.members.length>0});return{task:String(r||"").trim(),profile:t,secondary:s.secondary,confidence:s.confidence,stacks:A(n),size:u.length,squad:u,waves:C,ranked:a}}function R(r){for(var e=0;e<h.PHASES.length;e++)if(h.PHASES[e].id===r)return e;return 99}h.router={route:P,normalize:E,detectProfile:O,detectStacks:A,PROFILES:m}})(window);
+
+(function(o){"use strict";var c=o.GOLOCODE=o.GOLOCODE||{};function i(n){var e=n.directive,t=e.indexOf(". ");return t===-1?e:e.slice(t+2)}function h(n){var e=(n.matched||[]).filter(function(t){return t!=="mission anchor"&&t.charAt(0)!=="@"});return e.length?e.join(", "):null}function f(){var n=new Date;function e(t){return t<10?"0"+t:""+t}return n.getFullYear()+"-"+e(n.getMonth()+1)+"-"+e(n.getDate())+" "+e(n.getHours())+":"+e(n.getMinutes())}function m(n){var e=String(n||"project").toLowerCase().replace(/[^a-z0-9\s-]/g,"").trim().split(/\s+/).slice(0,4).join("-");return e||"golocode-project"}function p(n){var e=m(n.task),t=n.profile.id==="creative";return[{path:"index.html",lang:"html",code:`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>`+e+`</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <h1>`+e+`</h1>
+  </header>
+  <main id="main">
+`+(t?`    <canvas id="stage" aria-label="Interactive canvas" role="img"></canvas>
+`:`    <section class="panel">
+      <p>Replace this with the first real screen.</p>
+    </section>
+`)+`  </main>
+  <script src="app.js"><\/script>
+</body>
+</html>
+`},{path:"styles.css",lang:"css",code:`:root {
+  --bg: #0b0d12;
+  --surface: rgba(255, 255, 255, .05);
+  --text: #e8ecf5;
+  --muted: #99a2b8;
+  --accent: #39e08a;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.7 system-ui, -apple-system, sans-serif;
+}
+
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 8px; top: 8px; background: var(--accent); color: #05070a; padding: .5rem .8rem; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.top { padding: 1.5rem clamp(1rem, 4vw, 3rem); }
+
+main { padding: 0 clamp(1rem, 4vw, 3rem) 4rem; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+#stage { width: 100%; height: min(70vh, 620px); display: block; border-radius: var(--radius); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+`},{path:"app.js",lang:"javascript",code:t?`/* Animation loop with a fixed timestep, so behaviour is frame-rate
+   independent. Pauses when the tab is hidden and respects reduced motion. */
+(function () {
+  "use strict";
+
+  var canvas = document.getElementById("stage");
+  var ctx = canvas.getContext("2d");
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var STEP = 1 / 120;
+  var acc = 0, last = 0, raf = 0, t = 0;
+
+  function resize() {
+    var dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = canvas.clientWidth * dpr;
+    canvas.height = canvas.clientHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function update(dt) {
+    t += dt;              // TODO: advance the simulation here
+  }
+
+  function draw() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#39e08a";
+    ctx.beginPath();
+    ctx.arc(w / 2 + Math.cos(t) * w * 0.2, h / 2 + Math.sin(t * 1.3) * h * 0.2, 28, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    var dt = Math.min((now - last) / 1000, 0.25);
+    last = now;
+    acc += dt;
+    while (acc >= STEP) { update(STEP); acc -= STEP; }
+    draw();
+  }
+
+  function start() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  function stop() { cancelAnimationFrame(raf); raf = 0; }
+
+  addEventListener("resize", resize);
+  document.addEventListener("visibilitychange", function () {
+    document.hidden ? stop() : start();
+  });
+
+  resize();
+  if (reduced) { draw(); } else { start(); }
+})();
+`:`(function () {
+  "use strict";
+
+  // TODO: first real behaviour goes here.
+  console.log("`+e+` ready");
+})();
+`}]}function g(n){return[{path:"server.js",lang:"javascript",code:`/* Zero-dependency HTTP service. Swap in a framework once routes justify it. */
+const http = require("node:http");
+
+const PORT = process.env.PORT || 3000;
+
+const routes = {
+  "GET /health": (req, res) => send(res, 200, { ok: true }),
+  "GET /api/items": (req, res) => send(res, 200, { items: [] }),
+};
+
+function send(res, status, body) {
+  const payload = JSON.stringify(body);
+  res.writeHead(status, {
+    "content-type": "application/json; charset=utf-8",
+    "content-length": Buffer.byteLength(payload),
+    "x-content-type-options": "nosniff",
+  });
+  res.end(payload);
+}
+
+const server = http.createServer((req, res) => {
+  const url = new URL(req.url, \`http://\${req.headers.host}\`);
+  const handler = routes[\`\${req.method} \${url.pathname}\`];
+  if (!handler) return send(res, 404, { error: "not_found" });
+  try {
+    handler(req, res);
+  } catch (err) {
+    console.error(err);                       // never leak internals to the client
+    send(res, 500, { error: "internal_error" });
+  }
+});
+
+server.listen(PORT, () => console.log(\`listening on :\${PORT}\`));
+`},{path:"test/server.test.js",lang:"javascript",code:`/* Run with: node --test */
+const { test } = require("node:test");
+const assert = require("node:assert");
+
+test("health responds ok", async () => {
+  const res = await fetch("http://localhost:3000/health");
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+});
+
+test("unknown route is 404", async () => {
+  const res = await fetch("http://localhost:3000/nope");
+  assert.equal(res.status, 404);
+});
+`}]}function y(){return[{path:"main.py",lang:"python",code:`"""Minimal FastAPI service.  Run: uvicorn main:app --reload"""
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI(title="service")
+
+
+class Item(BaseModel):
+    id: int
+    name: str
+
+
+ITEMS: dict[int, Item] = {}
+
+
+@app.get("/health")
+def health() -> dict[str, bool]:
+    return {"ok": True}
+
+
+@app.get("/items/{item_id}", response_model=Item)
+def get_item(item_id: int) -> Item:
+    item = ITEMS.get(item_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="item not found")
+    return item
+
+
+@app.post("/items", response_model=Item, status_code=201)
+def create_item(item: Item) -> Item:
+    if item.id in ITEMS:
+        raise HTTPException(status_code=409, detail="id already exists")
+    ITEMS[item.id] = item
+    return item
+`},{path:"test_main.py",lang:"python",code:`from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+
+def test_health():
+    assert client.get("/health").json() == {"ok": True}
+
+
+def test_missing_item_is_404():
+    assert client.get("/items/999").status_code == 404
+
+
+def test_create_then_read():
+    client.post("/items", json={"id": 1, "name": "first"})
+    assert client.get("/items/1").json()["name"] == "first"
+`}]}function v(n){var e=n.stacks.indexOf("Python")!==-1||n.stacks.length===0;return e?[{path:"cli.py",lang:"python",code:`#!/usr/bin/env python3
+"""Command line entry point.  Scriptable first, pretty second."""
+import argparse
+import sys
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(description="TODO: one-line description")
+    p.add_argument("input", nargs="?", default="-", help="input file, or - for stdin")
+    p.add_argument("-o", "--output", default="-", help="output file, or - for stdout")
+    p.add_argument("-v", "--verbose", action="store_true", help="log progress to stderr")
+    return p
+
+
+def run(args: argparse.Namespace) -> int:
+    source = sys.stdin if args.input == "-" else open(args.input, encoding="utf-8")
+    sink = sys.stdout if args.output == "-" else open(args.output, "w", encoding="utf-8")
+    try:
+        for line in source:
+            sink.write(line)          # TODO: the actual transformation
+    finally:
+        if source is not sys.stdin:
+            source.close()
+        if sink is not sys.stdout:
+            sink.close()
+    return 0
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+    try:
+        return run(args)
+    except BrokenPipeError:
+        return 0                      # downstream closed the pipe: not an error
+    except KeyboardInterrupt:
+        return 130
+    except OSError as err:
+        print(f"error: {err}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+`}]:[{path:"cli.js",lang:"javascript",code:`#!/usr/bin/env node
+"use strict";
+
+const args = process.argv.slice(2);
+
+if (args.includes("--help") || args.includes("-h")) {
+  console.log("usage: cli [options] <input>\\n\\n  -o, --output  output file (default: stdout)\\n  -h, --help    show this help");
+  process.exit(0);
+}
+
+async function main() {
+  // TODO: the actual work
+  process.stdout.write("ok\\n");
+}
+
+main().catch((err) => {
+  console.error(\`error: \${err.message}\`);
+  process.exit(1);
+});
+`}]}function w(n){var e=n.stacks.indexOf("Python")!==-1;return e?[{path:"agent.py",lang:"python",code:`"""Claude-powered task runner.
+
+Install:  pip install anthropic
+Auth:     export ANTHROPIC_API_KEY=...   (or run: ant auth login)
+"""
+from anthropic import Anthropic
+
+client = Anthropic()
+
+SYSTEM = "You are a precise assistant. Answer with the result only."
+
+
+def ask(question: str) -> str:
+    with client.messages.stream(
+        model="claude-opus-5",
+        max_tokens=64000,
+        system=SYSTEM,
+        thinking={"type": "adaptive"},
+        output_config={"effort": "high"},
+        messages=[{"role": "user", "content": question}],
+    ) as stream:
+        message = stream.get_final_message()
+
+    if message.stop_reason == "refusal":
+        raise RuntimeError(f"declined: {message.stop_details}")
+
+    return "".join(b.text for b in message.content if b.type == "text")
+
+
+if __name__ == "__main__":
+    print(ask("Summarise what this project does in two sentences."))
+`}]:[{path:"agent.mjs",lang:"javascript",code:`/* Claude-powered task runner.
+ * Install: npm i @anthropic-ai/sdk
+ * Auth:    export ANTHROPIC_API_KEY=...   (or run: ant auth login)
+ */
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const SYSTEM = "You are a precise assistant. Answer with the result only.";
+
+export async function ask(question) {
+  const stream = client.messages.stream({
+    model: "claude-opus-5",
+    max_tokens: 64000,
+    system: SYSTEM,
+    thinking: { type: "adaptive" },
+    output_config: { effort: "high" },
+    messages: [{ role: "user", content: question }],
+  });
+
+  const message = await stream.finalMessage();
+  if (message.stop_reason === "refusal") {
+    throw new Error(\`declined: \${JSON.stringify(message.stop_details)}\`);
+  }
+
+  return message.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+}
+
+console.log(await ask("Summarise what this project does in two sentences."));
+`}]}function l(n){switch(n.profile.id){case"creative":case"web":return p(n);case"service":return n.stacks.indexOf("Python")!==-1?y():g(n);case"cli":return v(n);case"ai":return w(n);case"mobile":case"systems":case"infra":case"debug":case"perf":case"security":case"refactor":case"explain":return[];default:return p(n)}}function u(n){var e=[];return e.push("You are GOLOCODE, a coding system that runs a squad of "+n.size+" specialist engineers on one task."),e.push(""),e.push("TASK"),e.push(n.task),e.push(""),e.push("MISSION PROFILE: "+n.profile.label+(n.stacks.length?"  |  STACK SIGNALS: "+n.stacks.join(", "):"")),e.push(""),e.push("SQUAD — work through the phases in order. In each phase, apply every"),e.push("listed specialist's order to this task, then carry the result forward."),n.waves.forEach(function(t){e.push(""),e.push("["+t.phase.name+" — "+t.phase.label+"] "+t.phase.blurb),t.members.forEach(function(a){e.push("  - "+a.agent.codename+" ("+a.agent.role+"): "+i(a.agent))})}),e.push(""),e.push("DELIVERABLE"),e.push("Return complete, runnable code — every file in full, each in its own"),e.push("fenced block with the file path on the fence line. No placeholders, no"),e.push('"rest of the code here". Follow with a short build note: the decisions'),e.push("taken, the risks left open, and how to run and verify it."),e.join(`
+`)}function b(n){var e=[],t=l(n);e.push("# GOLOCODE mission dossier"),e.push(""),e.push("**Task** — "+n.task),e.push(""),e.push("| | |"),e.push("|---|---|"),e.push("| Profile | "+n.profile.glyph+" "+n.profile.label+" |"),n.secondary&&e.push("| Secondary read | "+n.secondary.label+" |"),e.push("| Stack signals | "+(n.stacks.length?n.stacks.join(", "):"none named — assuming a fresh start")+" |"),e.push("| Agents deployed | "+n.size+" of "+c.AGENTS.length+" |"),e.push("| Engine | Local Blueprint (deterministic, no model calls) |"),e.push("| Generated | "+f()+" |"),e.push(""),e.push("## Phase plan"),n.waves.forEach(function(s,k){e.push(""),e.push("### "+(k+1)+". "+s.phase.name+" — "+s.phase.label),e.push(""),e.push("_"+s.phase.blurb+"_"),e.push(""),s.members.forEach(function(r){var d=h(r);e.push("- **"+r.agent.codename+"** · "+r.agent.role+(d?" · _focus: "+d+"_":"")),e.push("  "+i(r.agent))})}),t.length&&(e.push(""),e.push("## Starter scaffold"),e.push(""),e.push("Files generated below — they run as-is, and each one is a place to"),e.push("start, not a finished answer."),e.push(""),t.forEach(function(s){e.push("- `"+s.path+"`")}));var a=[];return n.waves.forEach(function(s){s.phase.id==="verify"&&(a=s.members)}),a.length&&(e.push(""),e.push("## Risk register"),e.push(""),a.forEach(function(s){e.push("- [ ] **"+s.agent.codename+"** — "+s.agent.brief)})),e.push(""),e.push("## Definition of done"),e.push(""),e.push("- [ ] It runs from a clean checkout with one documented command."),e.push("- [ ] The unhappy paths are handled, not just the demo path."),e.push("- [ ] There is a test — or a written reason there is not one."),e.push("- [ ] No secret, key, or token is committed or shipped to the client."),e.push("- [ ] A stranger can read the README and run it without asking you."),e.push(""),e.push("---"),e.push(""),e.push("Generated by GOLOCODE · Local Blueprint engine · no model was called."),e.push("Add an API key to run this squad live against Claude."),{markdown:e.join(`
+`),files:t,prompt:u(n)}}c.blueprint={compose:b,missionPrompt:u,order:i,scaffoldFor:l}})(window);
+
+(function(C){"use strict";var g=C.GOLOCODE=C.GOLOCODE||{},I="https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@0.127.0/+esm",x="golocode.apiKey",m=[{id:"claude-opus-5",label:"Claude Opus 5",hint:"deepest reasoning — the default",inPrice:5,outPrice:25,adaptive:!0,effort:!0,fallbacks:!0},{id:"claude-sonnet-5",label:"Claude Sonnet 5",hint:"faster and cheaper per token",inPrice:2,outPrice:10,adaptive:!0,effort:!0,fallbacks:!1},{id:"claude-haiku-4-5",label:"Claude Haiku 4.5",hint:"cheapest — big fleets, simple tasks",inPrice:1,outPrice:5,adaptive:!1,effort:!1,fallbacks:!1}],O={fast:{cell:"low",final:"medium",label:"Fast"},standard:{cell:"medium",final:"high",label:"Standard"},deep:{cell:"high",final:"xhigh",label:"Deep"},max:{cell:"high",final:"max",label:"Maximum"}};function A(e){for(var t=0;t<m.length;t++)if(m[t].id===e)return m[t];return m[0]}function K(){try{return localStorage.getItem(x)||""}catch{return""}}function B(e){try{return e?localStorage.setItem(x,e):localStorage.removeItem(x),!0}catch{return!1}}var E=null;function F(){return E||(E=import(I).catch(function(e){throw E=null,new Error("Could not load the Anthropic SDK from the CDN ("+e.message+"). Serve this page over http(s) and allow cdn.jsdelivr.net, or switch to the Local Blueprint engine.")})),E}function H(e,t,n,a){var r=A(t);return r.adaptive&&(e.thinking=a&&a.showThinking?{type:"adaptive",display:"summarized"}:{type:"adaptive"}),r.effort&&(e.output_config={effort:n}),r.fallbacks&&(e.betas=["server-side-fallback-2026-07-01"],e.fallbacks="default"),e}function D(e){var t={};for(var n in e)n!=="betas"&&n!=="fallbacks"&&Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}function R(e){var t=String(e&&e.message||"");return e&&e.status===400&&/fallback|beta|unexpected|unrecognized|not supported/i.test(t)}function z(e){return(e.content||[]).filter(function(t){return t.type==="text"}).map(function(t){return t.text}).join("")}function T(e,t){if(e&&e.stop_reason==="refusal"){var n=e.stop_details&&e.stop_details.category?" ("+e.stop_details.category+")":"";throw new Error(t+": the model declined this request"+n+". Rephrase the task, or split out the part that triggered it.")}return e}function G(e,t){var n=t.betas?e.client.beta.messages:e.client.messages;return n.create(t,{signal:e.signal}).catch(function(a){if(R(a))return e.log("warn","Server-side fallbacks rejected by the API — retrying without them."),e.client.messages.create(D(t),{signal:e.signal});throw a})}function Y(e,t,n){var a=0,r=0,h=new Array(e.length);return new Promise(function(_,d){var v=!1;function S(){if(!v){if(a>=e.length&&r===0)return _(h);for(;r<t&&a<e.length;)(function(b){r++,a++,n(e[b],b).then(function(u){h[b]=u,r--,S()},function(u){v=!0,d(u)})})(a)}}S()})}function W(e,t,n){var a=[];return a.push("You are a cell of "+t.length+" specialist engineers inside GOLOCODE, a squad that solves one engineering task together."),a.push(""),a.push("Current phase: "+e.phase.name+" — "+e.phase.label+". "+e.phase.blurb),a.push(""),a.push("Specialists in this cell:"),t.forEach(function(r){a.push("- "+r.agent.codename+" ("+r.agent.role+"): "+r.agent.directive)}),a.push(""),a.push("Rules:"),a.push("- Answer as each specialist in turn, under a heading '### CODENAME'."),a.push("- Every line must be specific to this task: a decision, a file, a command, a number, or a risk with the condition that triggers it. No generic advice."),a.push("- At most 5 bullets each. Nothing useful to add for this task? Write one line: 'no input — <reason>'."),n?a.push("- You may include one short code block each, holding only the load-bearing logic. The full files are assembled later — do not write them here."):a.push("- Do not write implementation files in this phase."),a.push("- Disagreeing with another specialist is useful. Say so plainly and give your reason."),a.join(`
+`)}function $(e,t){var n=["TASK",e,""];return t&&(n.push("WHAT EARLIER PHASES ESTABLISHED"),n.push(t),n.push("")),n.push("Deliver your cell's output now."),n.join(`
+`)}function Q(e,t){var n=[];return n.push(g.LEAD.directive),n.push(""),n.push("You are closing a GOLOCODE mission run by "+e.size+" specialists across "+e.waves.length+" phases. Their notes are in the user message."),n.push(""),n.push("Output contract, in this order:"),n.push("1. '## Build note' — one short paragraph: what you are building, the two decisions that shaped it, and anything the squad disagreed on plus your call."),n.push("2. '## Files' — every file, complete. Each file is a fenced code block whose info string is the language then the path, exactly like:"),n.push("   ```javascript path=src/app.js"),n.push("   No placeholders, no '...rest unchanged', no truncation. If a file is long, write it in full anyway."),n.push("3. '## Run' — the exact commands to install, run, and verify."),n.push("4. '## Risks' — what is still weak, each with the condition that would expose it."),n.push(""),n.push("Write the code a working engineer would ship: the unhappy paths handled, no secrets in client code, and the comments only where the reason is not obvious."),t&&n.push("Honour the squad's findings, but you have the final call where they conflict."),n.join(`
+`)}function J(e,t){if(e.length<=t)return e;var n=Math.floor(t/2);return e.slice(0,n)+`
+
+[... `+(e.length-t)+` characters of notes trimmed ...]
+
+`+e.slice(e.length-n)}function V(e,t){for(var n=[],a=0;a<e.length;a+=t)n.push(e.slice(a,a+t));return n}function X(e,t,n){t=t||{},n=n||{};var a=n.log||function(){},r=n.agentState||function(){},h=n.delta||function(){},_=n.usage||function(){},d=t.model||m[0].id,v=O[t.depth]||O.standard,S=Math.max(1,t.cellSize||5),b=Math.max(1,t.concurrency||3),u=new AbortController,y={input:0,output:0,cacheRead:0,calls:0},p={plan:e,model:d,depth:v.label,phaseNotes:[],text:"",usage:y,cancel:function(){u.abort()}};return p.promise=function(){return F().then(function(P){var ne=P.default,k=new ne({apiKey:t.key,dangerouslyAllowBrowser:!0,maxRetries:2}),M={client:k,signal:u.signal,log:a};function L(i){var l=i&&i.usage;l&&(y.calls++,y.input+=l.input_tokens||0,y.output+=l.output_tokens||0,y.cacheRead+=l.cache_read_input_tokens||0,_(y))}var w="",N=Promise.resolve();return e.waves.forEach(function(i){N=N.then(function(){if(u.signal.aborted)throw new Error("Run cancelled.");var l=V(i.members,S);return a("phase",i.phase.name+" — "+i.members.length+" agents in "+l.length+" cell"+(l.length===1?"":"s")),n.phaseStart&&n.phaseStart(i,l.length),i.members.forEach(function(o){r(o.agent.id,"running")}),Y(l,b,function(o){var s=H({model:d,max_tokens:16e3,system:[{type:"text",text:`GOLOCODE squad run. The task is fixed for the whole run:
+
+`+e.task,cache_control:{type:"ephemeral"}},{type:"text",text:W(i,o,i.phase.id==="build")}],messages:[{role:"user",content:$(e.task,w)}]},d,v.cell,t);return G(M,s).then(function(f){return T(f,o.map(function(c){return c.agent.codename}).join("/")),L(f),o.forEach(function(c){r(c.agent.id,"done")}),z(f)}).catch(function(f){throw o.forEach(function(c){r(c.agent.id,"failed")}),f})}).then(function(o){var s=o.join(`
+
+`);p.phaseNotes.push({phase:i.phase,text:s}),w=J(w+(w?`
+
+`:"")+"["+i.phase.name+`]
+`+s,16e3),a("ok",i.phase.name+" complete.")})})}),N.then(function(){a("phase","SYNTHESIS — NORTHSTAR is assembling the deliverable."),r(g.LEAD.id,"running");var i=H({model:d,max_tokens:64e3,system:Q(e,w),messages:[{role:"user",content:`TASK
+`+e.task+`
+
+SQUAD NOTES
+`+(w||"(no phase notes — deliver the task directly)")+`
+
+Deliver the mission output now, following the output contract.`}]},d,v.final,{showThinking:t.showThinking}),l=i.betas?k.beta.messages:k.messages,o;try{o=l.stream(i,{signal:u.signal})}catch(s){if(!R(s))throw s;o=k.messages.stream(D(i),{signal:u.signal})}return async function(){try{for await(var s of o)s.type==="content_block_delta"&&(s.delta.type==="text_delta"?(p.text+=s.delta.text,h("text",s.delta.text)):s.delta.type==="thinking_delta"&&h("thinking",s.delta.thinking))}catch(q){if(R(q)){M.log("warn","Server-side fallbacks rejected — retrying the synthesis without them.");var f=k.messages.stream(D(i),{signal:u.signal});for await(var c of f)c.type==="content_block_delta"&&c.delta.type==="text_delta"&&(p.text+=c.delta.text,h("text",c.delta.text));var U=await f.finalMessage();return T(U,"NORTHSTAR"),L(U),r(g.LEAD.id,"done"),p}throw q}var j=await o.finalMessage();return T(j,"NORTHSTAR"),L(j),j.stop_reason==="max_tokens"&&a("warn","Output hit the token ceiling — the last file may be cut short. Re-run with a smaller fleet or a narrower task."),r(g.LEAD.id,"done"),p}()})}).catch(function(P){throw r(g.LEAD.id,"idle"),Z(P)})}(),p}function Z(e){if(!e)return new Error("Unknown error.");var t=e.status;return e.name==="APIUserAbortError"||/abort/i.test(e.message||"")?new Error("Run cancelled."):t===401?new Error("The API key was rejected (401). Check the key, or create a new one at console.anthropic.com."):t===403?new Error("This key is not allowed to call the Messages API (403)."):t===404?new Error("Model not found (404) — this account may not have access to the selected model."):t===429?new Error("Rate limited (429). Lower the fleet size or the concurrency, then try again."):t===400?new Error("The API rejected the request (400): "+(e.message||"")):t>=500?new Error("The API had a server error ("+t+"). Retrying usually clears it."):/Failed to fetch|NetworkError|ENOTFOUND/i.test(e.message||"")?new Error("Network error reaching api.anthropic.com. Check the connection, and note that opening this page from file:// blocks the request."):e}function ee(e,t){var n=A(t),a=Math.max(0,e.input-e.cacheRead),r=a/1e6*n.inPrice+e.cacheRead/1e6*n.inPrice*.1+e.output/1e6*n.outPrice;return r}function te(e){for(var t=[],n=/```([^\n]*)\n([\s\S]*?)```/g,a;(a=n.exec(e))!==null;){var r=(a[1]||"").trim(),h=r.match(/path=([^\s]+)/);h&&t.push({path:h[1].replace(/^["']|["']$/g,""),lang:r.split(/\s+/)[0]||"text",code:a[2].replace(/\s+$/,"")+`
+`})}return t}g.engine={MODELS:m,DEPTHS:O,SDK_URL:I,getKey:K,setKey:B,hasKey:function(){return!!K()},run:X,estimate:ee,extractFiles:te,modelInfo:A}})(window);
+
+(function(X){"use strict";var s=X.GOLOCODE;if(!s||!s.AGENTS)return;var z="golocode.prefs";function i(e){return document.getElementById(e)}function l(e,t,n){var a=document.createElement(e);return t&&(a.className=t),n!=null&&(a.textContent=n),a}function f(e){for(;e.firstChild;)e.removeChild(e.firstChild)}function Y(){var e=new Date;function t(n){return n<10?"0"+n:""+n}return t(e.getHours())+":"+t(e.getMinutes())+":"+t(e.getSeconds())}function M(e){return String(Math.round(e)).replace(/\B(?=(\d{3})+(?!\d))/g,",")}function A(e,t,n){var a=new Blob([t],{type:n||"text/plain;charset=utf-8"}),r=URL.createObjectURL(a),d=l("a");d.href=r,d.download=e,document.body.appendChild(d),d.click(),document.body.removeChild(d),setTimeout(function(){URL.revokeObjectURL(r)},1e3)}function S(e,t){var n=function(){if(t){var a=t.textContent;t.textContent="copied ✓",setTimeout(function(){t.textContent=a},1400)}};navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(e).then(n,function(){F(e,n)}):F(e,n)}function F(e,t){var n=l("textarea");n.value=e,n.setAttribute("readonly",""),n.style.position="fixed",n.style.left="-9999px",document.body.appendChild(n),n.select();try{document.execCommand("copy"),t()}catch{}document.body.removeChild(n)}var P=matchMedia("(prefers-reduced-motion: reduce)").matches,o={size:12,engine:"local",model:s.engine.MODELS[0].id,depth:"standard",plan:null,running:null,brief:"",prompt:"",files:[]};try{var R=JSON.parse(localStorage.getItem(z)||"{}");["size","engine","model","depth"].forEach(function(e){R[e]!=null&&(o[e]=R[e])})}catch{}function g(){try{localStorage.setItem(z,JSON.stringify({size:o.size,engine:o.engine,model:o.model,depth:o.depth}))}catch{}}var C=i("log");function c(e,t){var n=l("li",null,t);n.setAttribute("data-kind",e),n.setAttribute("data-t",Y()),C.appendChild(n),C.scrollTop=C.scrollHeight}function j(){f(C)}var m={};function Z(e){var t=i("profileStrip");f(t);function n(a,r){var d=l("span","pill"+(r?" "+r:""),a);return t.appendChild(d),d}n(e.profile.glyph+" "+e.profile.label),e.stacks.length&&n("stack: "+e.stacks.join(" · ")),n(e.size+" / "+s.AGENTS.length+" agents"),e.secondary&&n("also reads as: "+e.secondary.label)}function ee(e){var t=i("waves");f(t),m={},e.waves.forEach(function(n){var a=l("div","wave"),r=l("div","wave__head");r.appendChild(l("span","wave__glyph",n.phase.glyph)),r.appendChild(l("span","wave__name",n.phase.name)),r.appendChild(l("span","wave__label",n.phase.blurb)),r.appendChild(l("span","wave__count",n.members.length+(n.members.length===1?" agent":" agents"))),a.appendChild(r);var d=l("div","agents");n.members.forEach(function(u){var p=l("div","agent");p.setAttribute("data-state","idle"),p.title=s.blueprint.order(u.agent);var h=l("div","agent__top");h.appendChild(l("span","agent__glyph",u.agent.glyph)),h.appendChild(l("span","agent__name",u.agent.codename)),h.appendChild(l("span","agent__code",u.agent.code)),p.appendChild(h),p.appendChild(l("div","agent__role",u.agent.role));var Q=(u.matched||[]).filter(function(de){return de!=="mission anchor"});p.appendChild(l("div","agent__focus",Q.length?"▸ "+Q.join(", "):"▸ "+u.agent.divisionName.toLowerCase())),d.appendChild(p),m[u.agent.id]=p}),a.appendChild(d),t.appendChild(a)})}function x(e,t){var n=m[e];n&&n.setAttribute("data-state",t)}function T(e){Object.keys(m).forEach(function(t){m[t].setAttribute("data-state",e)})}function te(){var e=i("fleetGrid");f(e),s.DIVISIONS.forEach(function(t){var n=s.AGENTS.filter(function(d){return d.division===t.id}),a=l("button","divTile");a.type="button",a.setAttribute("aria-label","Open the roster filtered to "+t.name);var r=l("div","divTile__top");r.appendChild(l("span","divTile__glyph",t.glyph)),r.appendChild(l("span","divTile__name",t.name)),r.appendChild(l("span","divTile__n",n.length)),a.appendChild(r),a.appendChild(l("p","divTile__blurb",t.blurb)),a.appendChild(l("div","divTile__names",n.map(function(d){return d.codename}).join(" · "))),a.addEventListener("click",function(){y=t.id,N(),_(),J()}),e.appendChild(a)})}var G=null;function K(){return i("task").value.trim()}function k(){var e=K(),t=i("readout");if(!e){t.hidden=!0,i("fleetOverview").hidden=!1,o.plan=null,i("launchNote").textContent="Routing preview updates as you type.";return}var n=s.router.route(e,o.size);o.plan=n,t.hidden=!1,i("fleetOverview").hidden=!0,Z(n),ee(n),q(n)}function q(e){var t=i("launchNote");if(f(t),o.engine==="local"){t.appendChild(l("b",null,e.size+" agents")),t.appendChild(document.createTextNode(" · "+e.waves.length+" phases · local blueprint, no tokens billed"));return}var n=0;e.waves.forEach(function(a){n+=Math.ceil(a.members.length/5)}),t.appendChild(l("b",null,e.size+" agents")),t.appendChild(document.createTextNode(" · "+n+" squad calls + 1 synthesis · model: "+s.engine.modelInfo(o.model).label))}function ne(){clearTimeout(G),G=setTimeout(k,200)}function U(){i("output").hidden=!1}function H(e){o.brief=e,i("briefDoc").textContent=e}function ie(e){o.brief+=e;var t=i("briefDoc");t.textContent=o.brief,t.scrollTop=t.scrollHeight}function V(e){o.prompt=e,i("promptDoc").textContent=e}function I(e){o.files=e||[],i("fileCount").textContent=o.files.length;var t=i("files");if(f(t),!o.files.length){t.appendChild(l("p","panel__note","No files in this deliverable yet. The local blueprint only scaffolds project types it can start from scratch; live runs write every file the task needs."));return}o.files.forEach(function(n){var a=l("div","file"),r=l("div","file__head");r.appendChild(l("span","file__path",n.path)),r.appendChild(l("span","file__lang",n.lang||"text"));var d=l("div","file__acts"),u=l("button","btn btn--mini","copy");u.type="button",u.addEventListener("click",function(){S(n.code,u)});var p=l("button","btn btn--mini","download");p.type="button",p.addEventListener("click",function(){A(n.path.split("/").pop(),n.code)}),d.appendChild(u),d.appendChild(p),r.appendChild(d),a.appendChild(r);var h=l("pre");h.appendChild(l("code",null,n.code)),a.appendChild(h),t.appendChild(a)})}function ae(){var e=["# GOLOCODE deliverable","",o.brief,""];return o.files.length&&(e.push("---","","## Files",""),o.files.forEach(function(t){e.push("### "+t.path,"","```"+(t.lang||""),t.code.replace(/\s+$/,""),"```","")})),e.join(`
+`)}function re(e){j(),U(),c("phase","GOLOCODE online — "+e.size+" agents assigned to this mission."),c("","Profile: "+e.profile.label+(e.stacks.length?" · stack signals: "+e.stacks.join(", "):"")),c("","Engine: Local Blueprint — deterministic, runs in this browser, calls no model.");var t=s.blueprint.compose(e);H(t.markdown),V(t.prompt),I(t.files),i("meter").textContent="local blueprint · no tokens billed",T("queued");var n=P?0:320;e.waves.forEach(function(a,r){setTimeout(function(){a.members.forEach(function(d){x(d.agent.id,"running")}),c("phase",a.phase.name+" — "+a.members.length+(a.members.length===1?" agent":" agents")+" reporting."),setTimeout(function(){a.members.forEach(function(d){x(d.agent.id,"done")}),r===e.waves.length-1&&(c("ok","Blueprint complete: phase plan, "+t.files.length+" scaffold file"+(t.files.length===1?"":"s")+", risk register, handoff prompt."),c("","For code written for this exact task, switch the engine to Live, or copy the handoff prompt into any assistant."))},n*.55)},n*r)}),E("brief")}function oe(e){var t=s.engine.getKey();if(!t){D(),c("warn","Live engine needs an Anthropic API key. Add one, then launch again.");return}j(),U(),H(""),I([]),V(s.blueprint.missionPrompt(e)),E("brief"),c("phase","GOLOCODE online — "+e.size+" agents assigned to this mission."),c("","Profile: "+e.profile.label+" · model: "+s.engine.modelInfo(o.model).label+" · depth: "+o.depth),c("","Loading the Anthropic SDK…"),T("queued"),O(!0);var n=s.engine.run(e,{key:t,model:o.model,depth:o.depth,cellSize:5,concurrency:e.size>40?4:3,showThinking:!1},{log:function(a,r){c(a||"",r)},agentState:x,delta:function(a,r){a==="text"&&ie(r)},usage:function(a){var r=s.engine.estimate(a,o.model);i("meter").textContent="in "+M(a.input)+" · out "+M(a.output)+" · "+a.calls+" calls · ≈$"+r.toFixed(3)}});o.running=n,n.promise.then(function(a){var r=s.engine.extractFiles(a.text);I(r),c("ok","Mission complete — "+r.length+" file"+(r.length===1?"":"s")+" delivered."),r.length||c("warn","No path-tagged code blocks came back, so the Files tab is empty. The full response is in the Briefing tab."),O(!1),o.running=null},function(a){c("error",a&&a.message?a.message:String(a)),T("idle"),O(!1),o.running=null})}function O(e){i("launchBtn").disabled=e,i("cancelBtn").hidden=!e,i("task").readOnly=e}function $(){var e=K();if(!e){i("task").focus(),i("readout").hidden=!1,c("warn","Type a task first — anything from one line to a whole file.");return}k();var t=o.plan;t&&(o.engine==="live"?oe(t):re(t),i("readout").scrollIntoView({behavior:P?"auto":"smooth",block:"start"}))}var b=["brief","files","prompt"];function E(e){b.forEach(function(t){var n=i("tab-"+t),a=i("panel-"+t),r=t===e;n.setAttribute("aria-selected",r?"true":"false"),n.tabIndex=r?0:-1,a.hidden=!r})}b.forEach(function(e,t){var n=i("tab-"+e);n.addEventListener("click",function(){E(e)}),n.addEventListener("keydown",function(a){var r=a.key==="ArrowRight"?1:a.key==="ArrowLeft"?-1:0;if(r){a.preventDefault();var d=b[(t+r+b.length)%b.length];E(d),i("tab-"+d).focus()}})});var y="all",v=null;function _(){var e=i("rosterList"),t=i("rosterSearch").value.trim().toLowerCase();f(e);var n=s.AGENTS.filter(function(a){return y!=="all"&&a.division!==y?!1:t?(a.codename+" "+a.role+" "+a.brief+" "+a.tags.join(" ")+" "+a.divisionName).toLowerCase().indexOf(t)!==-1:!0});if(i("rosterCount").textContent=n.length,!n.length){e.appendChild(l("p","panel__note","No agent matches that. Try a skill, a language, or a role."));return}n.forEach(function(a){var r=l("div","rosterItem"),d=l("div","rosterItem__top");d.appendChild(l("span",null,a.glyph)),d.appendChild(l("span","rosterItem__name",a.codename)),d.appendChild(l("span","rosterItem__code",a.code)),r.appendChild(d),r.appendChild(l("div","rosterItem__role",a.role+" · "+a.divisionName)),r.appendChild(l("div","rosterItem__brief",a.brief)),r.appendChild(l("div","rosterItem__phase",s.phase(a.phase).name)),e.appendChild(r)})}function N(){var e=i("rosterDivs");f(e);function t(n,a){var r=l("button",null,a);r.type="button",r.setAttribute("aria-pressed",y===n?"true":"false"),r.addEventListener("click",function(){y=n,N(),_()}),e.appendChild(r)}t("all","all 100"),s.DIVISIONS.forEach(function(n){t(n.id,n.glyph+" "+n.name)})}function J(){v=document.activeElement,i("roster").hidden=!1,i("scrim").hidden=!1,i("rosterBtn").setAttribute("aria-expanded","true"),i("rosterSearch").focus()}function B(){i("roster").hidden=!0,i("scrim").hidden=!0,i("rosterBtn").setAttribute("aria-expanded","false"),v&&v.focus()}function D(){v=document.activeElement,i("keyModal").hidden=!1,i("keyInput").value=s.engine.getKey(),i("keyInput").focus()}function L(){i("keyModal").hidden=!0,i("keyInput").value="",v&&v.focus()}function w(){var e=o.engine==="live";Array.prototype.forEach.call(document.querySelectorAll(".control--live"),function(t){t.hidden=!e}),i("enginePill").textContent=e?"engine: live · "+s.engine.modelInfo(o.model).label:"engine: local blueprint",o.plan&&q(o.plan)}function le(){var e=i("model");f(e),s.engine.MODELS.forEach(function(t){var n=l("option",null,t.label+" — "+t.hint);n.value=t.id,e.appendChild(n)}),e.value=o.model}function W(){i("fleetCount").textContent=s.AGENTS.length,le(),i("engine").value=o.engine,i("depth").value=o.depth,Array.prototype.forEach.call(i("fleetSeg").querySelectorAll("button"),function(e){e.setAttribute("aria-checked",Number(e.getAttribute("data-size"))===o.size?"true":"false"),e.addEventListener("click",function(){o.size=Number(e.getAttribute("data-size")),Array.prototype.forEach.call(i("fleetSeg").querySelectorAll("button"),function(t){t.setAttribute("aria-checked",t===e?"true":"false")}),g(),k()})}),i("engine").addEventListener("change",function(){o.engine=this.value,g(),w(),o.engine==="live"&&!s.engine.hasKey()&&D()}),i("model").addEventListener("change",function(){o.model=this.value,g(),w()}),i("depth").addEventListener("change",function(){o.depth=this.value,g()}),i("task").addEventListener("input",ne),i("task").addEventListener("keydown",function(e){(e.metaKey||e.ctrlKey)&&e.key==="Enter"&&(e.preventDefault(),$())}),Array.prototype.forEach.call(i("presets").querySelectorAll(".chip"),function(e){e.addEventListener("click",function(){i("task").value=e.getAttribute("data-preset"),k(),i("task").focus()})}),i("launchBtn").addEventListener("click",$),i("cancelBtn").addEventListener("click",function(){o.running&&(o.running.cancel(),c("warn","Cancelling the run…"))}),document.addEventListener("click",function(e){var t=e.target;if(!(!t||!t.getAttribute)){var n=t.getAttribute("data-copy");n==="brief"&&S(o.brief,t),n==="prompt"&&S(o.prompt,t);var a=t.getAttribute("data-download");a==="brief"&&A("golocode-briefing.md",o.brief,"text/markdown;charset=utf-8"),a==="bundle"&&A("golocode-deliverable.md",ae(),"text/markdown;charset=utf-8")}}),i("rosterBtn").addEventListener("click",J),i("rosterClose").addEventListener("click",B),i("scrim").addEventListener("click",B),i("rosterSearch").addEventListener("input",_),N(),_(),te(),i("keyBtn").addEventListener("click",D),i("keyCancel").addEventListener("click",L),i("keySave").addEventListener("click",function(){var e=i("keyInput").value.trim();if(!e){L();return}s.engine.setKey(e),L(),c("ok","API key stored in this browser. Live engine ready."),i("engine").value="live",o.engine="live",g(),w()}),i("keyClear").addEventListener("click",function(){s.engine.setKey(""),i("keyInput").value="",c("","Stored API key cleared from this browser.")}),document.addEventListener("keydown",function(e){e.key==="Escape"&&(i("keyModal").hidden?i("roster").hidden||B():L())}),w(),i("readout").hidden=!0,i("meter").textContent="standing by"}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",W):W()})(window);
+
+</script>
+</body>
+</html>
