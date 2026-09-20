@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOLOCODE — 100-agent coding AI</title>
+<meta name="description" content="GOLOCODE routes any coding task to a squad drawn from 100 specialist agents — architecture, creative code, security, performance, delivery — then runs them in phases and returns complete, runnable code.">
+<meta name="theme-color" content="#05070a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="GOLOCODE — 100-agent coding AI">
+<meta property="og:description" content="One task in. A squad of specialists out. Complete, runnable code back.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/golocode.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◉</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#mission">Skip to the mission console</a>
+
+<header class="hud">
+  <div class="hud__brand">
+    <span class="hud__mark" aria-hidden="true">◉</span>
+    <span class="hud__name">
+      <b>GOLOCODE</b>
+      <i>100-agent coding AI</i>
+    </span>
+  </div>
+
+  <div class="hud__status" role="status" aria-live="polite">
+    <span class="pill pill--live"><span class="dot"></span><b id="fleetCount">100</b> agents online</span>
+    <span class="pill" id="enginePill">engine: local blueprint</span>
+  </div>
+
+  <div class="hud__actions">
+    <button type="button" class="btn btn--ghost" id="rosterBtn" aria-expanded="false" aria-controls="roster">Roster</button>
+    <button type="button" class="btn btn--ghost" id="keyBtn">API key</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ MISSION CONSOLE ============ -->
+  <section class="console" id="mission" aria-labelledby="missionTitle">
+    <h1 id="missionTitle" class="console__title">
+      Give it any coding task.<br><span>A squad assembles for it.</span>
+    </h1>
+
+    <div class="field">
+      <label for="task" class="field__label">Mission</label>
+      <textarea id="task" rows="4" spellcheck="false"
+        placeholder="e.g. build a physics-driven landing page with a canvas hero, or: my Express API leaks memory under load — find it and fix it"></textarea>
+      <p class="field__hint">
+        <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to launch. Paste code, error logs, or a whole file — the router reads all of it.
+      </p>
+    </div>
+
+    <div class="presets" id="presets" aria-label="Example missions">
+      <button type="button" class="chip" data-preset="Build a creative landing page with a WebGL shader hero, particles that react to the cursor, and sound that fades in on scroll.">creative landing page</button>
+      <button type="button" class="chip" data-preset="Build a REST API for a task manager: auth, projects, tasks, Postgres schema, and tests.">rest api + auth</button>
+      <button type="button" class="chip" data-preset="My React app takes 8 seconds to load on mobile. Find what is slow and fix it.">fix slow app</button>
+      <button type="button" class="chip" data-preset="Audit this login form for security holes and fix every one you find.">security audit</button>
+      <button type="button" class="chip" data-preset="Build a small 2D platformer in a single HTML file with tight controls, coyote time, and screen shake.">make a game</button>
+      <button type="button" class="chip" data-preset="Build a RAG assistant over our markdown docs: chunking, retrieval, citations, and an eval set.">rag assistant</button>
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <span class="control__label" id="fleetLabel">Fleet size</span>
+        <div class="seg" role="radiogroup" aria-labelledby="fleetLabel" id="fleetSeg">
+          <button type="button" role="radio" aria-checked="false" data-size="5">Strike<b>5</b></button>
+          <button type="button" role="radio" aria-checked="true"  data-size="12">Squad<b>12</b></button>
+          <button type="button" role="radio" aria-checked="false" data-size="30">Wing<b>30</b></button>
+          <button type="button" role="radio" aria-checked="false" data-size="100">Full fleet<b>100</b></button>
+        </div>
+      </div>
+
+      <div class="control">
+        <label class="control__label" for="engine">Engine</label>
+        <select id="engine">
+          <option value="local" selected>Local blueprint — no key, no model calls</option>
+          <option value="live">Live — run the squad on Claude</option>
+        </select>
+      </div>
+
+      <div class="control control--live" hidden>
+        <label class="control__label" for="model">Model</label>
+        <select id="model"></select>
+      </div>
+
+      <div class="control control--live" hidden>
+        <label class="control__label" for="depth">Depth</label>
+        <select id="depth">
+          <option value="fast">Fast — low effort, fewest tokens</option>
+          <option value="standard" selected>Standard</option>
+          <option value="deep">Deep — high effort</option>
+          <option value="max">Maximum — highest effort, highest cost</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="launch">
+      <button type="button" class="btn btn--go" id="launchBtn">
+        <span class="btn__glyph" aria-hidden="true">▶</span> Launch mission
+      </button>
+      <button type="button" class="btn btn--stop" id="cancelBtn" hidden>Cancel run</button>
+      <p class="launch__note" id="launchNote">Routing preview updates as you type.</p>
+    </div>
+  </section>
+
+  <!-- ============ FLEET OVERVIEW (empty state) ============ -->
+  <section class="fleet" id="fleetOverview" aria-labelledby="fleetTitle">
+    <div class="fleet__head">
+      <h2 id="fleetTitle">The fleet</h2>
+      <p class="fleet__lead">Ten divisions, ten specialists each. Type a task and the router
+        assembles the squad that fits it — every agent below is available to any mission.</p>
+    </div>
+    <div class="fleetGrid" id="fleetGrid"></div>
+  </section>
+
+  <!-- ============ SQUAD READOUT ============ -->
+  <section class="readout" id="readout" aria-labelledby="readoutTitle">
+    <div class="readout__head">
+      <h2 id="readoutTitle">Squad</h2>
+      <div class="profileStrip" id="profileStrip"></div>
+    </div>
+
+    <div class="waves" id="waves"></div>
+
+    <div class="logbox">
+      <div class="logbox__head">
+        <h3>Mission log</h3>
+        <span class="meter" id="meter"></span>
+      </div>
+      <ol class="log" id="log" aria-live="polite" aria-relevant="additions"></ol>
+    </div>
+  </section>
+
+  <!-- ============ OUTPUT ============ -->
+  <section class="output" id="output" hidden aria-labelledby="outputTitle">
+    <div class="output__head">
+      <h2 id="outputTitle">Deliverable</h2>
+      <div class="tabs" role="tablist" aria-label="Deliverable views">
+        <button type="button" role="tab" id="tab-brief" aria-controls="panel-brief" aria-selected="true">Briefing</button>
+        <button type="button" role="tab" id="tab-files" aria-controls="panel-files" aria-selected="false" tabindex="-1">Files <span class="count" id="fileCount">0</span></button>
+        <button type="button" role="tab" id="tab-prompt" aria-controls="panel-prompt" aria-selected="false" tabindex="-1">Handoff prompt</button>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-brief" role="tabpanel" aria-labelledby="tab-brief" tabindex="0">
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-copy="brief">Copy markdown</button>
+        <button type="button" class="btn btn--mini" data-download="brief">Download .md</button>
+      </div>
+      <pre class="doc" id="briefDoc"></pre>
+    </div>
+
+    <div class="panel" id="panel-files" role="tabpanel" aria-labelledby="tab-files" tabindex="0" hidden>
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-download="bundle">Download all as one file</button>
+      </div>
+      <div class="files" id="files"></div>
+    </div>
+
+    <div class="panel" id="panel-prompt" role="tabpanel" aria-labelledby="tab-prompt" tabindex="0" hidden>
+      <div class="panel__bar">
+        <button type="button" class="btn btn--mini" data-copy="prompt">Copy prompt</button>
+        <span class="panel__note">Paste this into Claude, Claude Code, or any assistant to run the same squad without a key.</span>
+      </div>
+      <pre class="doc" id="promptDoc"></pre>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ ROSTER DRAWER ============ -->
+<aside class="roster" id="roster" hidden aria-label="Full agent roster">
+  <div class="roster__head">
+    <h2>The fleet <span id="rosterCount">100</span></h2>
+    <button type="button" class="btn btn--ghost" id="rosterClose" aria-label="Close roster">✕</button>
+  </div>
+  <div class="roster__tools">
+    <label class="sr-only" for="rosterSearch">Search agents</label>
+    <input type="search" id="rosterSearch" placeholder="search a skill, role, or codename…" autocomplete="off">
+    <div class="roster__divs" id="rosterDivs"></div>
+  </div>
+  <div class="roster__list" id="rosterList"></div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<!-- ============ API KEY DIALOG ============ -->
+<div class="modal" id="keyModal" hidden role="dialog" aria-modal="true" aria-labelledby="keyTitle">
+  <div class="modal__card">
+    <h2 id="keyTitle">Anthropic API key</h2>
+    <p class="modal__body">
+      Needed only for the <b>Live</b> engine. The key is stored in this browser's
+      localStorage and sent directly to <code>api.anthropic.com</code> — GOLOCODE has no
+      server of its own.
+    </p>
+    <p class="modal__warn">
+      Anything stored in a browser is readable by anything else running in that browser.
+      Use a key with a spend limit, never a shared or production key, and clear it when you are done.
+    </p>
+    <label class="sr-only" for="keyInput">API key</label>
+    <input type="password" id="keyInput" placeholder="sk-ant-..." autocomplete="off" spellcheck="false">
+    <div class="modal__actions">
+      <button type="button" class="btn btn--go" id="keySave">Save key</button>
+      <button type="button" class="btn btn--ghost" id="keyClear">Clear stored key</button>
+      <button type="button" class="btn btn--ghost" id="keyCancel">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="foot">
+  <p>
+    GOLOCODE — 100 specialist agents, one mission at a time.
+    Local blueprint runs entirely in your browser; live runs go to the Claude API with your own key.
+  </p>
+</footer>
+
+<script src="assets/js/agents.js"></script>
+<script src="assets/js/router.js"></script>
+<script src="assets/js/blueprint.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
